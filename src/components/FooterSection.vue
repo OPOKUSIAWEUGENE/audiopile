@@ -1,33 +1,36 @@
 <template>
   <footer class="footer">
     <div class="footer-content">
-      <div class="footer-top">
-        <div class="orange-line"></div>
-        <div class="footer-header">
+      <div class="orange-line"></div>
+      <div class="footer-main">
+        <div class="footer-top">
           <img src="@/assets/shared/desktop/logo.svg" alt="audiophile" class="logo" />
           <nav class="footer-nav">
             <router-link to="/" class="nav-link">HOME</router-link>
-            <router-link to="/headphones" class="nav-link">HEADPHONES</router-link>
-            <router-link to="/speakers" class="nav-link">SPEAKERS</router-link>
-            <router-link to="/earphones" class="nav-link">EARPHONES</router-link>
+            <router-link to="/category/headphones" class="nav-link">HEADPHONES</router-link>
+            <router-link to="/category/speakers" class="nav-link">SPEAKERS</router-link>
+            <router-link to="/category/earphones" class="nav-link">EARPHONES</router-link>
           </nav>
         </div>
-      </div>
-
-      <div class="footer-main">
-        <p class="description">Audiophile is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we're open 7 days a week.</p>
-        <div class="footer-bottom">
-          <p class="copyright">Copyright 2021. All Rights Reserved</p>
-          <div class="social-links">
-            <a href="#" class="social-link" aria-label="Facebook">
-              <img src="@/assets/shared/desktop/icon-facebook.svg" alt="Facebook" />
-            </a>
-            <a href="#" class="social-link" aria-label="Twitter">
-              <img src="@/assets/shared/desktop/icon-twitter.svg" alt="Twitter" />
-            </a>
-            <a href="#" class="social-link" aria-label="Instagram">
-              <img src="@/assets/shared/desktop/icon-instagram.svg" alt="Instagram" />
-            </a>
+        
+        <div class="footer-info">
+          <p class="description">
+            Audiophile is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we're open 7 days a week.
+          </p>
+          
+          <div class="footer-bottom">
+            <p class="copyright">Copyright 2021. All Rights Reserved</p>
+            <div class="social-links">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link">
+                <img src="@/assets/shared/desktop/icon-facebook.svg" alt="Facebook" />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link">
+                <img src="@/assets/shared/desktop/icon-twitter.svg" alt="Twitter" />
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link">
+                <img src="@/assets/shared/desktop/icon-instagram.svg" alt="Instagram" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -38,106 +41,91 @@
 <script>
 export default {
   name: 'FooterSection'
-};
+}
 </script>
 
 <style scoped>
 .footer {
   background-color: #101010;
-  color: white;
-  padding: 75px 0 48px;
+  padding: 52px 24px;
+  color: #FFFFFF;
 }
 
 .footer-content {
   max-width: 1110px;
   margin: 0 auto;
-  padding: 0 24px;
-}
-
-.footer-top {
   position: relative;
-  margin-bottom: 36px;
-}
-
-.footer-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
 }
 
 .orange-line {
-  position: absolute;
-  top: -75px;
-  left: 0;
   width: 101px;
   height: 4px;
-  background-color: #D87D4A;
+  background: #D87D4A;
+  margin-bottom: 48px;
+}
+
+.footer-main {
+  text-align: center;
+}
+
+.footer-top {
+  margin-bottom: 48px;
 }
 
 .logo {
+  display: inline-block;
   height: 25px;
+  margin-bottom: 48px;
 }
 
 .footer-nav {
   display: flex;
-  gap: 34px;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
 }
 
 .nav-link {
-  color: white;
+  color: #FFFFFF;
   text-decoration: none;
   font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
   line-height: 25px;
-  transition: color 0.3s ease;
+  letter-spacing: 2px;
+  font-weight: 700;
   text-transform: uppercase;
+  transition: color 0.3s ease;
 }
 
 .nav-link:hover {
   color: #D87D4A;
 }
 
-.footer-main {
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
-}
-
 .description {
-  color: rgba(255, 255, 255, 0.5);
   font-size: 15px;
   line-height: 25px;
+  opacity: 0.5;
+  margin-bottom: 48px;
   font-weight: 500;
-  max-width: 540px;
-}
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
 }
 
 .copyright {
-  color: rgba(255, 255, 255, 0.5);
   font-size: 15px;
   line-height: 25px;
+  opacity: 0.5;
+  margin-bottom: 48px;
   font-weight: 700;
-  margin: 0;
 }
 
 .social-links {
   display: flex;
   gap: 16px;
-  align-items: center;
+  justify-content: center;
 }
 
 .social-link {
-  transition: filter 0.3s ease;
   display: flex;
   align-items: center;
+  transition: filter 0.3s ease;
 }
 
 .social-link:hover {
@@ -149,83 +137,89 @@ export default {
   height: 24px;
 }
 
-@media (min-width: 768px) and (max-width: 1199px) {
+@media (min-width: 768px) {
   .footer {
-    padding: 60px 0 46px;
+    padding: 60px 40px;
   }
 
   .footer-content {
-    padding: 0 40px;
+    text-align: left;
   }
 
-  .footer-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
+  .footer-main {
+    text-align: left;
   }
 
-  .orange-line {
-    top: -60px;
+  .footer-top {
+    margin-bottom: 32px;
+  }
+
+  .logo {
+    margin-bottom: 32px;
   }
 
   .footer-nav {
     flex-direction: row;
     gap: 34px;
-  }
-
-  .footer-main {
-    gap: 32px;
+    align-items: flex-start;
   }
 
   .description {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 767px) {
-  .footer {
-    padding: 52px 0;
-  }
-
-  .footer-header {
-    flex-direction: column;
-    align-items: center;
-    gap: 48px;
-    margin-bottom: 48px;
-    text-align: center;
-  }
-
-  .footer-nav {
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-  }
-
-  .footer-main {
-    text-align: center;
-    gap: 48px;
+    margin-bottom: 80px;
+    max-width: 689px;
   }
 
   .footer-bottom {
-    flex-direction: column;
-    gap: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .copyright {
-    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1110px) {
+  .footer {
+    padding: 75px 0;
   }
 
-  .social-links {
-    justify-content: center;
+  .footer-main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px;
   }
 
-  .orange-line {
-    left: 50%;
-    transform: translateX(-50%);
+  .footer-top {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+  }
+
+  .logo {
+    margin-bottom: 0;
+  }
+
+  .footer-nav {
+    margin: 0;
+  }
+
+  .footer-info {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
   }
 
   .description {
-    max-width: 100%;
+    max-width: 540px;
+    margin-bottom: 56px;
+  }
+
+  .footer-bottom {
+    width: 100%;
   }
 }
 </style> 
