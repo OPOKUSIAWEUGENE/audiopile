@@ -2,7 +2,7 @@
   <header class="header">
     <div class="header-container">
       <nav class="nav">
-        <button class="hamburger" @click="toggleMenu" aria-label="Toggle menu">
+        <button class="hamburger" @click="toggleMobileMenu" aria-label="Toggle menu">
           <img src="../assets/shared/tablet/icon-hamburger.svg" alt="" />
         </button>
         <router-link to="/" class="logo">
@@ -14,14 +14,17 @@
           <router-link to="/category/speakers" class="nav-link">SPEAKERS</router-link>
           <router-link to="/category/earphones" class="nav-link">EARPHONES</router-link>
         </div>
-        <router-link to="/cart" class="cart">
+        <button class="cart" @click="toggleCart">
           <img src="../assets/shared/desktop/icon-cart.svg" alt="Cart" />
-        </router-link>
+        </button>
       </nav>
     </div>
     
+    <!-- Cart Menu -->
+    <CartMenu v-if="isCartOpen" @close="closeCart" />
+
     <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu" :class="{ 'is-open': isMenuOpen }" @click="closeMenu">
+    <div class="mobile-menu" :class="{ 'is-open': isMobileMenuOpen }" @click="closeMenu">
       <div class="mobile-menu-content" @click.stop>
         <div class="mobile-categories">
           <div v-for="category in categories" :key="category.name" class="mobile-category-card">
@@ -41,30 +44,48 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import CartMenu from './CartMenu.vue'
+
 export default {
   name: 'HeaderSection',
-  data() {
+  components: {
+    CartMenu
+  },
+  setup() {
+    const isCartOpen = ref(false)
+    const isMobileMenuOpen = ref(false)
+    const categories = [
+      { name: 'HEADPHONES', link: '/category/headphones' },
+      { name: 'SPEAKERS', link: '/category/speakers' },
+      { name: 'EARPHONES', link: '/category/earphones' }
+    ]
+
+    const toggleCart = () => {
+      isCartOpen.value = !isCartOpen.value
+    }
+
+    const toggleMobileMenu = () => {
+      isMobileMenuOpen.value = !isMobileMenuOpen.value
+    }
+
+    const closeMenu = () => {
+      isMobileMenuOpen.value = false
+    }
+
+    const closeCart = () => {
+      isCartOpen.value = false
+    }
+
     return {
-      isMenuOpen: false,
-      categories: [
-        { name: 'HEADPHONES', link: '/category/headphones' },
-        { name: 'SPEAKERS', link: '/category/speakers' },
-        { name: 'EARPHONES', link: '/category/earphones' }
-      ]
+      isCartOpen,
+      isMobileMenuOpen,
+      toggleCart,
+      toggleMobileMenu,
+      closeMenu,
+      closeCart,
+      categories
     }
-  },
-  methods: {
-    toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen
-      document.body.style.overflow = this.isMenuOpen ? 'hidden' : ''
-    },
-    closeMenu() {
-      this.isMenuOpen = false
-      document.body.style.overflow = ''
-    }
-  },
-  beforeUnmount() {
-    document.body.style.overflow = ''
   }
 }
 </script>
@@ -145,6 +166,15 @@ export default {
 .cart {
   display: flex;
   align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.cart:hover {
+  opacity: 0.7;
 }
 
 .cart img {
