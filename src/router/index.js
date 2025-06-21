@@ -4,9 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/HomePage.vue';
 import About from '../views/AboutPage.vue';
 import Dashboard from '../views/DashboardPage.vue';
-import Headphones from '../views/HeadphonesPage.vue';
-import Speakers from '../views/SpeakersPage.vue';
-import Earphones from '../views/EarphonesPage.vue';
+import ProductsPage from '../views/ProductsPage.vue';
 import ProductDetail from '../views/ProductDetailPage.vue';
 
 const routes = [
@@ -17,21 +15,9 @@ const routes = [
     meta: { requiresAuth: false },
   },
   {
-    path: '/category/headphones',
-    name: 'Headphones',
-    component: Headphones,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/category/speakers',
-    name: 'Speakers',
-    component: Speakers,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/category/earphones',
-    name: 'Earphones',
-    component: Earphones,
+    path: '/category/:category',
+    name: 'Products',
+    component: ProductsPage,
     meta: { requiresAuth: false },
   },
   {

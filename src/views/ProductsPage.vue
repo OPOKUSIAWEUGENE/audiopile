@@ -1,12 +1,12 @@
 <template>
-  <div class="earphones-page">
+  <div class="products-page">
     <header class="page-header">
-      <h1>EARPHONES</h1>
+      <h1>{{ categoryTitle }}</h1>
     </header>
     
     <div class="products-grid">
       <ProductCard
-        v-for="product in earphoneProducts"
+        v-for="product in categoryProducts"
         :key="product.id"
         :product="product"
       />
@@ -47,20 +47,7 @@
       </router-link>
     </div>
 
-    <div class="best-gear">
-      <div class="best-gear-image">
-        <picture>
-          <source media="(min-width: 1110px)" srcset="@/assets/shared/desktop/image-best-gear.jpg">
-          <source media="(min-width: 768px)" srcset="@/assets/shared/tablet/image-best-gear.jpg">
-          <img src="@/assets/shared/mobile/image-best-gear.jpg" alt="Best audio gear">
-        </picture>
-      </div>
-      <div class="best-gear-content">
-        <h2>BRINGING YOU THE <span>BEST</span> AUDIO GEAR</h2>
-        <p>Located at the heart of New York City, Audiophile is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Audiophile the best place to buy your portable audio equipment.</p>
-      </div>
-    </div>
-
+    <InfoSection class="info-section" />
     <FooterSection>
       <template #nav>
         <div>
@@ -98,26 +85,41 @@
 
 <script>
 import ProductCard from '@/components/ProductCard.vue'
+import InfoSection from '@/components/InfoSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
 import productsData from '@/stores/data.json'
 
 export default {
-  name: 'EarphonesPage',
+  name: 'ProductsPage',
   components: {
     ProductCard,
+    InfoSection,
     FooterSection
   },
   computed: {
-    earphoneProducts() {
-      return productsData.filter(product => product.category === 'earphones')
+    category() {
+      return this.$route.params.category
+    },
+    categoryTitle() {
+      return this.category.charAt(0).toUpperCase() + this.category.slice(1)
+    },
+    categoryProducts() {
+      return productsData
+        .filter(product => product.category === this.category)
         .sort((a, b) => b.new - a.new)
+    }
+  },
+  watch: {
+    '$route'() {
+      // Scroll to top when route changes
+      window.scrollTo(0, 0)
     }
   }
 }
 </script>
 
 <style scoped>
-.earphones-page {
+.products-page {
   background-color: #FAFAFA;
   padding-top: 90px; /* Account for fixed header */
 }
@@ -223,57 +225,8 @@ export default {
   height: 12px;
 }
 
-.best-gear {
-  padding: 0 24px;
+.info-section {
   margin-bottom: 120px;
-  text-align: center;
-}
-
-.best-gear-image {
-  margin-bottom: 40px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.best-gear-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.best-gear-content h2 {
-  font-size: 28px;
-  line-height: 38px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin: 0 0 32px;
-}
-
-.best-gear-content span {
-  color: #D87D4A;
-}
-
-.best-gear-content p {
-  font-size: 15px;
-  line-height: 25px;
-  color: rgba(0, 0, 0, 0.5);
-  margin: 0;
-}
-
-.social-links {
-  display: flex;
-  gap: 16px;
-}
-
-.social-links a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.social-links img {
-  width: 24px;
-  height: 24px;
 }
 
 @media (min-width: 768px) {
@@ -301,23 +254,11 @@ export default {
   .category-link {
     flex: 1;
   }
-
-  .best-gear {
-    padding: 0 40px;
-    margin-bottom: 96px;
-  }
-
-  .best-gear-content h2 {
-    font-size: 40px;
-    line-height: 44px;
-    letter-spacing: 1.429px;
-  }
 }
 
 @media (min-width: 1110px) {
   .products-grid,
-  .category-links,
-  .best-gear {
+  .category-links {
     padding: 0;
     max-width: 1110px;
     margin-left: auto;
@@ -326,23 +267,6 @@ export default {
 
   .category-links {
     gap: 30px;
-  }
-
-  .best-gear {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 125px;
-    text-align: left;
-    align-items: center;
-  }
-
-  .best-gear-image {
-    order: 2;
-    margin-bottom: 0;
-  }
-
-  .best-gear-content {
-    order: 1;
   }
 }
 </style> 
