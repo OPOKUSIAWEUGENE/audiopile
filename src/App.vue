@@ -2,9 +2,7 @@
 <template>
   <div id="app">
     <HeaderSection />
-    <main>
-      <router-view />
-    </main>
+    <router-view />
   </div>
 </template>
 
@@ -21,10 +19,20 @@ export default {
 
 <style>
 /* Optional global styles */
-body {
-  font-family: Arial, sans-serif;
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+body {
+  font-family: 'Manrope', sans-serif;
+}
+
+#app {
+  min-height: 100vh;
+}
+
 /* nav a {
   margin-right: 10px;
 } */

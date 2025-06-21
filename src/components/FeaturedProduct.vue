@@ -45,8 +45,8 @@ export default {
 <style scoped>
 .featured {
   max-width: 1110px;
-  margin: 168px auto 0;
-  padding: 0 24px;
+  margin: 120px auto 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -60,6 +60,7 @@ export default {
   height: 560px;
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
 .featured-main-content {
@@ -200,20 +201,23 @@ export default {
   color: white;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1110px) {
   .featured {
-    margin-top: 96px;
-    padding: 0 40px;
+    margin: 96px 40px 0;
+    max-width: none;
   }
 
+  /* ZX9 Speaker Tablet Styles */
   .featured-main {
-    padding: 52px 24px 0;
     height: 720px;
+    padding: 52px 0 0;
     text-align: center;
   }
 
   .featured-main-content {
     flex-direction: column;
+    justify-content: flex-start;
+    gap: 64px;
   }
 
   .featured-main-image {
@@ -222,25 +226,76 @@ export default {
 
   .featured-main-image img {
     width: 197px;
-    margin-bottom: 64px;
+    margin-bottom: 0;
   }
 
   .featured-main-text {
-    max-width: 349px;
+    padding: 0 24px;
   }
 
   .circles-pattern {
+    width: 944px;
+    height: 944px;
     top: -280px;
     left: 50%;
     transform: translateX(-50%);
   }
 
+  /* ZX7 Speaker Tablet Styles */
   .featured-secondary {
+    background-image: url('@/assets/home/tablet/image-speaker-zx7.jpg');
     padding: 0 62px;
   }
 
+  /* YX1 Earphones Tablet Styles */
   .featured-split-content {
     padding: 0 41px;
+  }
+}
+
+@media (max-width: 768px) {
+  .featured {
+    margin: 120px 24px 0;
+    max-width: none;
+  }
+
+  .featured-main {
+    height: 600px;
+    padding: 55px 0 0;
+  }
+
+  .featured-main-content {
+    gap: 32px;
+  }
+
+  .featured-main-image img {
+    width: 172px;
+  }
+
+  .featured-main-text h2 {
+    font-size: 36px;
+    line-height: 40px;
+    margin-bottom: 24px;
+  }
+
+  .circles-pattern {
+    width: 558px;
+    height: 558px;
+    top: -120px;
+  }
+
+  .featured-secondary {
+    background-image: url('@/assets/home/mobile/image-speaker-zx7.jpg');
+    padding: 0 24px;
+  }
+
+  .featured-split {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .featured-split-content {
+    padding: 41px 24px;
   }
 }
 

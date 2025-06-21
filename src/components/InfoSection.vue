@@ -7,9 +7,9 @@
       </div>
       <div class="info-image">
         <picture>
-          <source media="(min-width: 769px)" srcset="@/assets/shared/desktop/image-best-gear.jpg">
-          <source media="(min-width: 376px)" srcset="@/assets/shared/tablet/image-best-gear.jpg">
-          <img src="@/assets/shared/mobile/image-best-gear.jpg" alt="Best audio gear">
+          <source media="(min-width: 1110px)" :srcset="require('@/assets/shared/desktop/image-best-gear.jpg')">
+          <source media="(min-width: 768px)" :srcset="require('@/assets/shared/tablet/image-best-gear.jpg')">
+          <img :src="require('@/assets/shared/mobile/image-best-gear.jpg')" alt="Best audio gear">
         </picture>
       </div>
     </div>
@@ -26,7 +26,8 @@ export default {
 .info {
   max-width: 1110px;
   margin: 200px auto;
-  padding: 0 24px;
+  padding: 0 165px;
+  text-align: center;
 }
 
 .info-content {
@@ -37,13 +38,14 @@ export default {
 
 .info-text {
   flex: 1;
+  max-width: 445px;
 }
 
 .info-text h2 {
-  font-size: 40px;
+  font-size: 56px;
   line-height: 1.1;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   margin-bottom: 32px;
   text-transform: uppercase;
 }
@@ -53,13 +55,25 @@ export default {
 }
 
 .info-text p {
-  font-size: 15px;
-  line-height: 1.67;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 500;
   color: rgba(0, 0, 0, 0.5);
+  margin: 0;
 }
 
 .info-image {
   flex: 1;
+  width: 540px;
+  height: 588px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.info-image picture {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .info-image img {
@@ -69,33 +83,36 @@ export default {
   border-radius: 8px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1110px) {
   .info {
-    margin: 96px auto;
-    padding: 0 40px;
+    margin: 96px 40px;
+    padding: 0;
   }
 
   .info-content {
     flex-direction: column-reverse;
     gap: 63px;
-    text-align: center;
+  }
+
+  .info-text {
+    max-width: 573px;
+    width: 100%;
   }
 
   .info-text h2 {
-    font-size: 32px;
-    margin-bottom: 32px;
+    font-size: 40px;
+    letter-spacing: 1.5px;
   }
 
-  .info-text p {
-    max-width: 573px;
-    margin: 0 auto;
+  .info-image {
+    width: 100%;
+    height: 300px;
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .info {
-    margin: 120px auto;
-    padding: 0 24px;
+    margin: 120px 24px;
   }
 
   .info-content {
@@ -103,16 +120,12 @@ export default {
   }
 
   .info-text h2 {
-    font-size: 28px;
-    margin-bottom: 32px;
+    font-size: 36px;
+    letter-spacing: 1.3px;
   }
 
-  .info-text p {
-    margin: 0;
-  }
-
-  .info-image img {
-    min-height: 300px;
+  .info-image {
+    height: 300px;
   }
 }
 </style> 

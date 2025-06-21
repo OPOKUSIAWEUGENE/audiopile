@@ -1,19 +1,20 @@
 <template>
   <header class="header">
     <div class="header-content">
-      <button class="menu-btn">
-        <img src="@/assets/shared/tablet/icon-hamburger.svg" alt="Menu" />
-      </button>
-
-      <a href="/" class="logo">
-        <img src="@/assets/shared/desktop/logo.svg" alt="audiophile" />
-      </a>
+      <div class="header-left">
+        <button class="menu-btn">
+          <img src="@/assets/shared/tablet/icon-hamburger.svg" alt="Menu" />
+        </button>
+        <a href="/" class="logo">
+          <img src="@/assets/shared/desktop/logo.svg" alt="audiophile" />
+        </a>
+      </div>
 
       <nav class="nav-desktop">
-        <a href="#" class="nav-link">HOME</a>
-        <a href="#" class="nav-link">HEADPHONES</a>
-        <a href="#" class="nav-link">SPEAKERS</a>
-        <a href="#" class="nav-link">EARPHONES</a>
+        <a href="/" class="nav-link">HOME</a>
+        <a href="/headphones" class="nav-link">HEADPHONES</a>
+        <a href="/speakers" class="nav-link">SPEAKERS</a>
+        <a href="/earphones" class="nav-link">EARPHONES</a>
       </nav>
 
       <button class="cart-btn">
@@ -43,11 +44,17 @@ export default {
 .header-content {
   max-width: 1110px;
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 32px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 42px;
 }
 
 .menu-btn {
@@ -106,17 +113,23 @@ export default {
   height: 20px;
 }
 
+@media (max-width: 1110px) {
+  .header-content {
+    padding: 32px 40px;
+  }
+}
+
 @media (max-width: 768px) {
+  .header-content {
+    padding: 32px 40px;
+  }
+
   .menu-btn {
     display: block;
   }
 
   .nav-desktop {
     display: none;
-  }
-
-  .logo {
-    margin-left: 42px;
   }
 }
 
@@ -125,8 +138,8 @@ export default {
     padding: 32px 24px;
   }
 
-  .logo {
-    margin-left: 0;
+  .header-left {
+    gap: 24px;
   }
 
   .logo img {

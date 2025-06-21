@@ -1,37 +1,17 @@
 <template>
   <section class="categories">
     <div class="categories-container">
-      <div class="category-card">
+      <div v-for="category in categories" :key="category.name" class="category-card">
         <div class="category-image">
-          <img src="@/assets/shared/desktop/image-category-thumbnail-headphones.png" alt="Headphones" />
+          <img :src="require('@/assets/shared/desktop/image-category-thumbnail-' + category.name.toLowerCase() + '.png')" :alt="category.name">
         </div>
-        <h2>HEADPHONES</h2>
-        <a href="#" class="shop-link">
+        <h3>{{ category.name }}</h3>
+        <router-link :to="category.link" class="shop-link">
           SHOP
-          <img src="@/assets/shared/desktop/icon-arrow-right.svg" alt="Arrow right" class="arrow-icon" />
-        </a>
-      </div>
-
-      <div class="category-card">
-        <div class="category-image">
-          <img src="@/assets/shared/desktop/image-category-thumbnail-speakers.png" alt="Speakers" />
-        </div>
-        <h2>SPEAKERS</h2>
-        <a href="#" class="shop-link">
-          SHOP
-          <img src="@/assets/shared/desktop/icon-arrow-right.svg" alt="Arrow right" class="arrow-icon" />
-        </a>
-      </div>
-
-      <div class="category-card">
-        <div class="category-image">
-          <img src="@/assets/shared/desktop/image-category-thumbnail-earphones.png" alt="Earphones" />
-        </div>
-        <h2>EARPHONES</h2>
-        <a href="#" class="shop-link">
-          SHOP
-          <img src="@/assets/shared/desktop/icon-arrow-right.svg" alt="Arrow right" class="arrow-icon" />
-        </a>
+          <svg width="8" height="12" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.322 1l5 5-5 5" stroke="#D87D4A" stroke-width="2" fill="none" fill-rule="evenodd"/>
+          </svg>
+        </router-link>
       </div>
     </div>
   </section>
@@ -39,18 +19,25 @@
 
 <script>
 export default {
-  name: 'CategoryCards'
+  name: 'CategoryCards',
+  props: {
+    categories: {
+      type: Array,
+      required: true
+    }
+  }
 }
 </script>
 
 <style scoped>
 .categories {
-  padding: 120px 24px 0;
-  margin: 0 auto;
-  max-width: 1110px;
+  padding: 200px 165px 0;
+  background: #FFFFFF;
 }
 
 .categories-container {
+  max-width: 1110px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
@@ -62,6 +49,7 @@ export default {
   padding: 116px 0 30px;
   text-align: center;
   position: relative;
+  min-height: 204px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,35 +57,43 @@ export default {
 
 .category-image {
   position: absolute;
-  top: -52px;
+  top: -80px;
   left: 50%;
   transform: translateX(-50%);
-  width: 160px;
-  height: 160px;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .category-image img {
-  width: 100%;
+  width: 170px;
   height: auto;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
 }
 
-h2 {
+h3 {
   font-size: 18px;
-  font-weight: 700;
+  line-height: 25px;
   letter-spacing: 1.3px;
-  margin-bottom: 15px;
+  text-transform: uppercase;
   color: #000000;
+  margin-bottom: 15px;
+  font-weight: 700;
 }
 
 .shop-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 13px;
   font-size: 13px;
-  font-weight: 700;
+  line-height: 18px;
   letter-spacing: 1px;
+  text-transform: uppercase;
   color: rgba(0, 0, 0, 0.5);
   text-decoration: none;
+  font-weight: 700;
   transition: color 0.3s ease;
 }
 
@@ -105,14 +101,13 @@ h2 {
   color: #D87D4A;
 }
 
-.arrow-icon {
-  width: 8px;
-  height: 12px;
+.shop-link svg {
+  margin-top: 1px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1110px) {
   .categories {
-    padding: 96px 40px 0;
+    padding: 148px 40px 0;
   }
 
   .categories-container {
@@ -120,28 +115,44 @@ h2 {
   }
 
   .category-card {
-    padding: 88px 0 22px;
+    padding: 88px 0 24px;
   }
 
   .category-image {
-    width: 120px;
-    height: 120px;
-    top: -40px;
+    top: -52px;
+    width: 148px;
+    height: 148px;
+  }
+
+  .category-image img {
+    width: 140px;
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .categories {
-    padding: 84px 24px 0;
+    padding: 92px 24px 0;
   }
 
   .categories-container {
     grid-template-columns: 1fr;
     gap: 68px;
+    max-width: 327px;
   }
 
   .category-card {
+    min-height: 165px;
     padding: 88px 0 22px;
+  }
+
+  .category-image {
+    top: -50px;
+    width: 140px;
+    height: 140px;
+  }
+
+  .category-image img {
+    width: 130px;
   }
 }
 </style> 

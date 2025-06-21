@@ -1,15 +1,8 @@
 <template>
-  <div>
-    <HeroSection
-      title="XX99 MARK II HEADPHONES"
-      description="Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast."
-      buttonText="SEE PRODUCT"
-      :image="heroImage"
-      @see-product="goToProduct('xx99-mark-two-headphones')"
-    />
-
+  <div class="home">
+    <HeroSection />
     <CategoryCards :categories="categories" />
-
+    
     <FeaturedProduct
       title="ZX9 SPEAKER"
       description="Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound."
@@ -52,7 +45,7 @@
 </template>
 
 <script>
-import HeroSection from '../components/HeroSection.vue';
+import HeroSection from '@/components/HeroSection.vue';
 import CategoryCards from '../components/CategoryCards.vue';
 import FeaturedProduct from '../components/FeaturedProduct.vue';
 import InfoSection from '../components/InfoSection.vue';
@@ -63,6 +56,21 @@ function asset(path) {
   // Remove leading './' if present
   return require(`@/assets/${path.replace('./assets/', '')}`);
 }
+
+const categories = [
+  {
+    name: 'HEADPHONES',
+    link: '/category/headphones'
+  },
+  {
+    name: 'SPEAKERS',
+    link: '/category/speakers'
+  },
+  {
+    name: 'EARPHONES',
+    link: '/category/earphones'
+  }
+]
 
 export default {
   name: 'HomePage',
@@ -75,27 +83,10 @@ export default {
   },
   data() {
     return {
-      heroImage: asset(data[3].image.mobile), // XX99 Mark II Headphones
+      categories,
       zx9Image: asset(data[5].image.mobile),
       zx7Image: asset(data[4].image.mobile),
-      yx1Image: asset(data[0].image.mobile),
-      categories: [
-        {
-          name: 'HEADPHONES',
-          image: asset(data[1].categoryImage.mobile),
-          link: '/category/headphones'
-        },
-        {
-          name: 'SPEAKERS',
-          image: asset(data[5].categoryImage.mobile),
-          link: '/category/speakers'
-        },
-        {
-          name: 'EARPHONES',
-          image: asset(data[0].categoryImage.mobile),
-          link: '/category/earphones'
-        }
-      ]
+      yx1Image: asset(data[0].image.mobile)
     };
   },
   methods: {
@@ -107,5 +98,7 @@ export default {
 </script>
 
 <style scoped>
-/* Add any page-specific styles here */
+.home {
+  min-height: 100vh;
+}
 </style>
