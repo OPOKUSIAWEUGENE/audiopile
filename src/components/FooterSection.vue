@@ -3,13 +3,15 @@
     <div class="footer-content">
       <div class="footer-top">
         <div class="orange-line"></div>
-        <img src="@/assets/shared/desktop/logo.svg" alt="audiophile" class="logo" />
-        <nav class="footer-nav">
-          <router-link to="/" class="nav-link">HOME</router-link>
-          <router-link to="/headphones" class="nav-link">HEADPHONES</router-link>
-          <router-link to="/speakers" class="nav-link">SPEAKERS</router-link>
-          <router-link to="/earphones" class="nav-link">EARPHONES</router-link>
-        </nav>
+        <div class="footer-header">
+          <img src="@/assets/shared/desktop/logo.svg" alt="audiophile" class="logo" />
+          <nav class="footer-nav">
+            <router-link to="/" class="nav-link">HOME</router-link>
+            <router-link to="/headphones" class="nav-link">HEADPHONES</router-link>
+            <router-link to="/speakers" class="nav-link">SPEAKERS</router-link>
+            <router-link to="/earphones" class="nav-link">EARPHONES</router-link>
+          </nav>
+        </div>
       </div>
 
       <div class="footer-main">
@@ -54,11 +56,14 @@ export default {
 
 .footer-top {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 36px;
   margin-bottom: 36px;
+}
+
+.footer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .orange-line {
@@ -105,8 +110,7 @@ export default {
   font-size: 15px;
   line-height: 25px;
   font-weight: 500;
-  opacity: 0.5;
-  max-width: 100%;
+  max-width: 540px;
 }
 
 .footer-bottom {
@@ -121,7 +125,6 @@ export default {
   font-size: 15px;
   line-height: 25px;
   font-weight: 700;
-  opacity: 0.5;
   margin: 0;
 }
 
@@ -155,11 +158,10 @@ export default {
     padding: 0 40px;
   }
 
-  .footer-top {
+  .footer-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 32px;
-    margin-bottom: 32px;
   }
 
   .orange-line {
@@ -180,13 +182,15 @@ export default {
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 767px) {
   .footer {
     padding: 52px 0;
   }
 
-  .footer-top {
+  .footer-header {
+    flex-direction: column;
     align-items: center;
+    gap: 48px;
     margin-bottom: 48px;
     text-align: center;
   }
@@ -218,6 +222,10 @@ export default {
   .orange-line {
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  .description {
+    max-width: 100%;
   }
 }
 </style> 

@@ -1,25 +1,20 @@
 <template>
   <header class="header">
-    <div class="header-content">
-      <div class="header-left">
-        <button class="menu-btn">
-          <img src="@/assets/shared/tablet/icon-hamburger.svg" alt="Menu" />
-        </button>
-        <a href="/" class="logo">
-          <img src="@/assets/shared/desktop/logo.svg" alt="audiophile" />
-        </a>
-      </div>
-
-      <nav class="nav-desktop">
-        <a href="/" class="nav-link">HOME</a>
-        <a href="/headphones" class="nav-link">HEADPHONES</a>
-        <a href="/speakers" class="nav-link">SPEAKERS</a>
-        <a href="/earphones" class="nav-link">EARPHONES</a>
+    <div class="header-container">
+      <nav class="nav">
+        <router-link to="/" class="logo">
+          <img src="../assets/shared/desktop/logo.svg" alt="audiophile" />
+        </router-link>
+        <div class="nav-links">
+          <router-link to="/" class="nav-link">HOME</router-link>
+          <router-link to="/headphones" class="nav-link">HEADPHONES</router-link>
+          <router-link to="/speakers" class="nav-link">SPEAKERS</router-link>
+          <router-link to="/earphones" class="nav-link">EARPHONES</router-link>
+        </div>
+        <router-link to="/cart" class="cart">
+          <img src="../assets/shared/desktop/icon-cart.svg" alt="Cart" />
+        </router-link>
       </nav>
-
-      <button class="cart-btn">
-        <img src="@/assets/shared/desktop/icon-cart.svg" alt="Cart" />
-      </button>
     </div>
   </header>
 </template>
@@ -27,13 +22,13 @@
 <script>
 export default {
   name: 'HeaderSection'
-};
+}
 </script>
 
 <style scoped>
 .header {
   background-color: #191919;
-  color: white;
+  height: 96px;
   position: fixed;
   top: 0;
   left: 0;
@@ -41,110 +36,93 @@ export default {
   z-index: 100;
 }
 
-.header-content {
+.header-container {
   max-width: 1110px;
+  height: 100%;
   margin: 0 auto;
-  padding: 32px 40px;
+  padding: 0 24px;
+}
+
+.nav {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 42px;
-}
-
-.menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.menu-btn img {
-  width: 16px;
-  height: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
 }
 
 .logo {
-  height: 25px;
+  display: flex;
+  align-items: center;
 }
 
 .logo img {
-  height: 100%;
+  height: 25px;
 }
 
-.nav-desktop {
+.nav-links {
   display: flex;
   gap: 34px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .nav-link {
-  color: white;
+  color: #FFFFFF;
   text-decoration: none;
   font-size: 13px;
-  font-weight: 700;
+  line-height: 25px;
   letter-spacing: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
   transition: color 0.3s ease;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.router-link-active {
   color: #D87D4A;
 }
 
-.cart-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
+.cart {
+  display: flex;
+  align-items: center;
 }
 
-.cart-btn:hover {
-  opacity: 0.7;
-}
-
-.cart-btn img {
+.cart img {
   width: 23px;
   height: 20px;
+  transition: filter 0.3s ease;
+}
+
+.cart:hover img {
+  filter: brightness(0.7);
 }
 
 @media (max-width: 1110px) {
-  .header-content {
-    padding: 32px 40px;
+  .header-container {
+    padding: 0 40px;
+  }
+
+  .nav-links {
+    position: static;
+    transform: none;
+    margin: 0 auto;
   }
 }
 
 @media (max-width: 768px) {
-  .header-content {
-    padding: 32px 40px;
+  .header {
+    height: 90px;
   }
 
-  .menu-btn {
-    display: block;
+  .header-container {
+    padding: 0 24px;
   }
 
-  .nav-desktop {
+  .nav-links {
     display: none;
-  }
-}
-
-@media (max-width: 375px) {
-  .header-content {
-    padding: 32px 24px;
-  }
-
-  .header-left {
-    gap: 24px;
-  }
-
-  .logo img {
-    width: 143px;
-    height: auto;
   }
 }
 </style> 

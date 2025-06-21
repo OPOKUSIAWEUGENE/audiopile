@@ -1,12 +1,14 @@
 <template>
   <section class="hero">
     <div class="hero-content">
-      <span class="overline">NEW PRODUCT</span>
-      <h1>XX99 MARK II<br>HEADPHONES</h1>
-      <p>Experience natural, lifelike audio and<br>exceptional build quality made for the<br>passionate music enthusiast.</p>
-      <router-link to="/product/xx99-mark-two-headphones" class="btn btn-primary">
-        SEE PRODUCT
-      </router-link>
+      <div class="hero-content-inner">
+        <span class="overline">NEW PRODUCT</span>
+        <h1>XX99 MARK II<br>HEADPHONES</h1>
+        <p>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
+        <router-link to="/product/xx99-mark-two-headphones" class="btn btn-primary">
+          SEE PRODUCT
+        </router-link>
+      </div>
     </div>
   </section>
 </template>
@@ -27,15 +29,21 @@ export default {
   min-height: 632px;
   display: flex;
   align-items: center;
-  padding: 0 165px;
   position: relative;
   margin-top: 0;
 }
 
 .hero-content {
+  max-width: 1110px;
+  margin: 0 auto;
+  padding: 0 165px;
+  width: 100%;
+  position: relative;
+}
+
+.hero-content-inner {
   max-width: 398px;
   color: #FFFFFF;
-  z-index: 1;
 }
 
 .hero::before {
@@ -45,7 +53,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .overline {
@@ -73,6 +81,7 @@ p {
   color: rgba(255, 255, 255, 0.75);
   margin-bottom: 40px;
   font-weight: 500;
+  opacity: 0.75;
 }
 
 .btn {
@@ -90,15 +99,27 @@ p {
 .btn-primary {
   background-color: #D87D4A;
   color: #FFFFFF;
+  border: none;
 }
 
 .btn-primary:hover {
   background-color: #FBAF85;
 }
 
+@media (min-width: 1200px) {
+  .hero {
+    height: 729px;
+  }
+
+  .hero-content {
+    display: flex;
+    align-items: center;
+  }
+}
+
 @media (max-width: 1110px) {
   .hero {
-    padding: 0 40px;
+    padding: 0;
     background-image: url('../assets/home/tablet/image-header.jpg');
     text-align: center;
     justify-content: center;
@@ -106,6 +127,12 @@ p {
   }
 
   .hero-content {
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-content-inner {
     margin: 0 auto;
     padding-top: 126px;
   }
@@ -114,10 +141,6 @@ p {
     font-size: 48px;
     line-height: 52px;
     margin-bottom: 24px;
-  }
-
-  .hero::before {
-    background: rgba(0, 0, 0, 0.2);
   }
 }
 
