@@ -6,6 +6,7 @@ import About from '../views/AboutPage.vue';
 import Dashboard from '../views/DashboardPage.vue';
 import ProductsPage from '../views/ProductsPage.vue';
 import ProductDetail from '../views/ProductDetailPage.vue';
+import Checkout from '../views/CheckoutPage.vue';
 
 const routes = [
   {
@@ -37,6 +38,12 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: Checkout,
+    meta: { requiresAuth: false },
   },
   {
     path: '/:pathMatch(.*)*',

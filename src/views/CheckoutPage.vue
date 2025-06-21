@@ -72,6 +72,12 @@
                 <input type="password" id="eMoneyPin" v-model="formData.eMoneyPin" placeholder="6891" required>
               </div>
             </template>
+            <template v-else>
+              <div class="cash-on-delivery">
+                <img src="@/assets/checkout/icon-cash-on-delivery.svg" alt="Cash on Delivery" />
+                <p>The 'Cash on Delivery' option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled.</p>
+              </div>
+            </template>
           </div>
         </section>
 
@@ -80,7 +86,7 @@
           <div class="cart-items">
             <div v-for="item in cartStore.items" :key="item.id" class="cart-item">
               <div class="item-image">
-                <img :src="require(`@/${item.image}`)" :alt="item.name" />
+                <img :src="getImageUrl(item.image)" :alt="item.name" />
               </div>
               <div class="item-details">
                 <h3>{{ item.name.split(' ').slice(0, -1).join(' ') }}</h3>
@@ -93,7 +99,7 @@
           <div class="summary-totals">
             <div class="summary-row">
               <span>TOTAL</span>
-              <span class="amount">$ {{ cartStore.totalPrice.toLocaleString() }}</span>
+              <span class="amount">$ {{ cartStore.total?.toLocaleString() || '0' }}</span>
             </div>
             <div class="summary-row">
               <span>SHIPPING</span>
@@ -101,11 +107,11 @@
             </div>
             <div class="summary-row">
               <span>VAT (INCLUDED)</span>
-              <span class="amount">$ {{ (cartStore.totalPrice * 0.2).toLocaleString() }}</span>
+              <span class="amount">$ {{ ((cartStore.total || 0) * 0.2).toLocaleString() }}</span>
             </div>
             <div class="summary-row grand-total">
               <span>GRAND TOTAL</span>
-              <span class="amount">$ {{ (cartStore.totalPrice + 50).toLocaleString() }}</span>
+              <span class="amount">$ {{ ((cartStore.total || 0) + 50).toLocaleString() }}</span>
             </div>
           </div>
 
@@ -138,9 +144,9 @@
         <small>Copyright 2021. All Rights Reserved</small>
       </template>
       <template #socials>
-        <a href="#"><img src="/facebook-icon.png" alt="Facebook" /></a>
-        <a href="#"><img src="/twitter-icon.png" alt="Twitter" /></a>
-        <a href="#"><img src="/instagram-icon.png" alt="Instagram" /></a>
+        <a href="#"><img src="@/assets/shared/desktop/icon-facebook.svg" alt="Facebook" /></a>
+        <a href="#"><img src="@/assets/shared/desktop/icon-twitter.svg" alt="Twitter" /></a>
+        <a href="#"><img src="@/assets/shared/desktop/icon-instagram.svg" alt="Instagram" /></a>
       </template>
     </FooterSection>
 </template>
@@ -178,11 +184,16 @@ export default {
       showConfirmation.value = true
     }
 
+    const getImageUrl = (path) => {
+      return new URL(`../assets/${path}`, import.meta.url).href
+    }
+
     return {
       cartStore,
       formData,
       showConfirmation,
-      handleSubmit
+      handleSubmit,
+      getImageUrl
     }
   }
 }
@@ -191,7 +202,7 @@ export default {
 <style scoped>
 .checkout-page {
   background-color: #FAFAFA;
-  padding: 90px 24px 24px;
+  padding: 16px 24px 97px;
   min-height: 100vh;
 }
 
@@ -222,6 +233,8 @@ h1 {
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: 32px;
+  color: #000000;
+  font-weight: 700;
 }
 
 .checkout-form {
@@ -231,13 +244,22 @@ h1 {
   margin-bottom: 32px;
 }
 
+section {
+  margin-bottom: 32px;
+}
+
+section:last-child {
+  margin-bottom: 0;
+}
+
 h2 {
   color: #D87D4A;
   font-size: 13px;
   line-height: 25px;
-  letter-spacing: 1px;
+  letter-spacing: 0.93px;
   text-transform: uppercase;
   margin-bottom: 16px;
+  font-weight: 700;
 }
 
 .form-grid {
@@ -260,6 +282,7 @@ label {
   font-weight: 700;
   line-height: 16px;
   letter-spacing: -0.21px;
+  color: #000000;
 }
 
 input[type="text"],
@@ -272,6 +295,14 @@ input[type="password"] {
   border-radius: 8px;
   font-size: 14px;
   font-weight: 700;
+  color: #000000;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="password"]::placeholder {
+  color: rgba(0, 0, 0, 0.4);
 }
 
 input[type="text"]:focus,
@@ -296,10 +327,40 @@ input[type="password"]:focus {
   border: 1px solid #CFCFCF;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: -0.25px;
+}
+
+.radio-label:has(input:checked) {
+  border-color: #D87D4A;
 }
 
 .radio-label input[type="radio"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #CFCFCF;
+  border-radius: 50%;
   margin: 0;
+  position: relative;
+}
+
+.radio-label input[type="radio"]:checked {
+  border-color: #D87D4A;
+}
+
+.radio-label input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #D87D4A;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .summary {
@@ -318,6 +379,10 @@ input[type="password"]:focus {
   gap: 16px;
   align-items: center;
   margin-bottom: 24px;
+}
+
+.cart-item:last-child {
+  margin-bottom: 0;
 }
 
 .item-image {
@@ -367,10 +432,15 @@ input[type="password"]:focus {
   margin-bottom: 8px;
 }
 
+.summary-row:last-child {
+  margin-bottom: 0;
+}
+
 .summary-row span:first-child {
   font-size: 15px;
   line-height: 25px;
   color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
 }
 
 .amount {
@@ -385,6 +455,7 @@ input[type="password"]:focus {
 
 .grand-total span:first-child {
   text-transform: uppercase;
+  color: #000000;
 }
 
 .grand-total .amount {
@@ -410,19 +481,52 @@ input[type="password"]:focus {
   background: #FBAF85;
 }
 
+.cash-on-delivery {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.cash-on-delivery img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.cash-on-delivery p {
+  font-size: 15px;
+  line-height: 25px;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .cash-on-delivery {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+}
+
 @media (min-width: 768px) {
   .checkout-page {
-    padding-top: 120px;
+    padding: 48px 40px 116px;
   }
 
   .form-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .payment-method {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (min-width: 1110px) {
   .checkout-page {
-    padding-top: 160px;
+    padding: 79px 165px 141px;
   }
 
   .container {
