@@ -7,6 +7,7 @@ import Dashboard from '../views/DashboardPage.vue';
 import Headphones from '../views/HeadphonesPage.vue';
 import Speakers from '../views/SpeakersPage.vue';
 import Earphones from '../views/EarphonesPage.vue';
+import ProductDetail from '../views/ProductDetailPage.vue';
 
 const routes = [
   {
@@ -31,6 +32,12 @@ const routes = [
     path: '/category/earphones',
     name: 'Earphones',
     component: Earphones,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/product/:slug',
+    name: 'ProductDetail',
+    component: ProductDetail,
     meta: { requiresAuth: false },
   },
   {
