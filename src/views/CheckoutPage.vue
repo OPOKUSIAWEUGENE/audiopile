@@ -86,10 +86,10 @@
           <div class="cart-items">
             <div v-for="item in cartStore.items" :key="item.id" class="cart-item">
               <div class="item-image">
-                <img :src="getImageUrl(item.image)" :alt="item.name" />
+                <img :src="require(`@/${item.image}`)" :alt="item.name" />
               </div>
               <div class="item-details">
-                <h3>{{ item.name.split(' ').slice(0, -1).join(' ') }}</h3>
+                <h3>{{ item.name }}</h3>
                 <p class="price">$ {{ item.price.toLocaleString() }}</p>
               </div>
               <span class="quantity">x{{ item.quantity }}</span>
@@ -184,16 +184,11 @@ export default {
       showConfirmation.value = true
     }
 
-    const getImageUrl = (path) => {
-      return new URL(`../assets/${path}`, import.meta.url).href
-    }
-
     return {
       cartStore,
       formData,
       showConfirmation,
-      handleSubmit,
-      getImageUrl
+      handleSubmit
     }
   }
 }

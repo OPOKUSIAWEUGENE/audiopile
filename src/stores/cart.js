@@ -28,7 +28,7 @@ export const useCartStore = defineStore('cart', {
           id: product.id,
           name: product.name.split(' ').slice(0, -1).join(' '), // Remove the last word (e.g., "Headphones")
           price: product.price,
-          image: product.image.mobile.slice(2),
+          image: product.image.mobile.replace(/^\.\//, ''), // Remove leading ./ but keep the full path
           quantity: quantity
         })
       }
@@ -61,6 +61,10 @@ export const useCartStore = defineStore('cart', {
       if (index !== -1) {
         this.items.splice(index, 1)
       }
+    },
+
+    clearCart() {
+      this.items = []
     }
   }
 }) 
