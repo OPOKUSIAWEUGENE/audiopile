@@ -338,4 +338,29 @@ export default {
     height: 200px;
   }
 }
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .featured {
+    padding: 0 40px;
+    margin: 96px auto;
+    gap: 32px;
+  }
+
+  .featured-split {
+    gap: 11px;
+  }
+
+  .featured-split-image img {
+    height: 320px;
+  }
+
+  .featured-split-content {
+    padding: 0 41px;
+    height: 320px;
+  }
+
+  .featured-split-content h2 {
+    margin-bottom: 32px;
+  }
+}
 </style> 
