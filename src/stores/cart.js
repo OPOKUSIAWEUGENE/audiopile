@@ -9,7 +9,7 @@ export const useCartStore = defineStore('cart', {
     cartItems: (state) => state.items,
     
     total: (state) => {
-      return state.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+      return state.items.reduce((total, item) => total + (item.price * item.quantity), 0)
     },
     
     totalItems: (state) => {
@@ -26,34 +26,41 @@ export const useCartStore = defineStore('cart', {
       } else {
         this.items.push({
           id: product.id,
-          name: product.name,
+          name: product.name.split(' ').slice(0, -1).join(' '), // Remove the last word (e.g., "Headphones")
           price: product.price,
-          image: product.image,
-          quantity
+          image: product.image.mobile.slice(2),
+          quantity: quantity
         })
       }
     },
     
-    incrementQuantity(item) {
-      const cartItem = this.items.find(i => i.id === item.id)
-      if (cartItem) {
-        cartItem.quantity++
+    incrementQuantity(productId) {
+      const item = this.items.find(item => item.id === productId)
+      if (item) {
+        item.quantity++
       }
     },
     
-    decrementQuantity(item) {
-      const cartItem = this.items.find(i => i.id === item.id)
-      if (cartItem) {
-        if (cartItem.quantity > 1) {
-          cartItem.quantity--
+    decrementQuantity(productId) {
+      const item = this.items.find(item => item.id === productId)
+      if (item) {
+        if (item.quantity > 1) {
+          item.quantity--
         } else {
-          this.items = this.items.filter(i => i.id !== item.id)
+          this.removeItem(productId)
         }
       }
     },
     
     removeAll() {
       this.items = []
+    },
+    
+    removeItem(productId) {
+      const index = this.items.findIndex(item => item.id === productId)
+      if (index !== -1) {
+        this.items.splice(index, 1)
+      }
     }
   }
 }) 

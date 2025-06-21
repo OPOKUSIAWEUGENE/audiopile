@@ -3,8 +3,8 @@
     <div class="cart-overlay" @click="$emit('close')"></div>
     <div class="cart-content">
       <div class="cart-header">
-        <h2>CART ({{ totalItems }})</h2>
-        <button class="remove-all" @click="removeAll">Remove all</button>
+        <h2>CART ({{ cartItems.length }})</h2>
+        <button v-if="cartItems.length > 0" class="remove-all" @click="removeAll">Remove all</button>
       </div>
 
       <div v-if="cartItems.length > 0" class="cart-items">
@@ -17,9 +17,9 @@
             <p class="price">$ {{ item.price.toLocaleString() }}</p>
           </div>
           <div class="quantity-selector">
-            <button @click="decrementQuantity(item.id)">-</button>
+            <button @click="decrementQuantity(item.id)" class="quantity-btn">-</button>
             <span>{{ item.quantity }}</span>
-            <button @click="incrementQuantity(item.id)">+</button>
+            <button @click="incrementQuantity(item.id)" class="quantity-btn">+</button>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
       <template v-if="cartItems.length > 0">
         <div class="cart-total">
           <span>TOTAL</span>
-          <span>$ {{ total.toLocaleString() }}</span>
+          <span class="total-amount">$ {{ total.toLocaleString() }}</span>
         </div>
 
         <router-link to="/checkout" class="checkout-button" @click="$emit('close')">
@@ -51,13 +51,12 @@ export default {
   emits: ['close'],
   setup() {
     const cartStore = useCartStore()
-    const { cartItems, total, totalItems } = storeToRefs(cartStore)
+    const { cartItems, total } = storeToRefs(cartStore)
     const { removeAll, incrementQuantity, decrementQuantity } = cartStore
 
     return {
       cartItems,
       total,
-      totalItems,
       removeAll,
       incrementQuantity,
       decrementQuantity
@@ -96,12 +95,6 @@ export default {
   padding: 32px 28px;
 }
 
-.empty-cart {
-  text-align: center;
-  padding: 32px 0;
-  color: rgba(0, 0, 0, 0.5);
-}
-
 .cart-header {
   display: flex;
   justify-content: space-between;
@@ -129,6 +122,12 @@ export default {
 
 .remove-all:hover {
   color: #D87D4A;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 32px 0;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .cart-items {
@@ -178,11 +177,11 @@ export default {
   display: flex;
   align-items: center;
   background: #F1F1F1;
-  padding: 8px;
+  padding: 15px;
   gap: 20px;
 }
 
-.quantity-selector button {
+.quantity-btn {
   background: none;
   border: none;
   color: rgba(0, 0, 0, 0.25);
@@ -190,15 +189,18 @@ export default {
   font-weight: 700;
   cursor: pointer;
   padding: 0;
+  transition: color 0.3s ease;
 }
 
-.quantity-selector button:hover {
+.quantity-btn:hover {
   color: #D87D4A;
 }
 
 .quantity-selector span {
   font-size: 13px;
   font-weight: 700;
+  min-width: 16px;
+  text-align: center;
 }
 
 .cart-total {
@@ -208,16 +210,18 @@ export default {
   margin-bottom: 24px;
 }
 
-.cart-total span:first-child {
+.cart-total span {
   font-size: 15px;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
 }
 
-.cart-total span:last-child {
-  font-size: 18px;
+.cart-total span:first-child {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.total-amount {
   font-weight: 700;
+  font-size: 18px !important;
 }
 
 .checkout-button {
@@ -227,7 +231,6 @@ export default {
   color: white;
   text-align: center;
   padding: 15px;
-  border-radius: 0;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 1px;

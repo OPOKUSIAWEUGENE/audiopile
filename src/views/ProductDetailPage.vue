@@ -148,13 +148,7 @@ export default {
   methods: {
     addToCart() {
       if (this.product) {
-        this.cartStore.addToCart({
-          id: this.product.id,
-          name: this.product.name,
-          price: this.product.price,
-          image: this.product.image.mobile.slice(2),
-          quantity: this.quantity
-        })
+        this.cartStore.addToCart(this.product, this.quantity)
         // Reset quantity after adding to cart
         this.quantity = 1
       }
