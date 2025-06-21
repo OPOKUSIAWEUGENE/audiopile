@@ -3,91 +3,64 @@
     <div class="cart-overlay" @click="$emit('close')"></div>
     <div class="cart-content">
       <div class="cart-header">
-        <h2>CART ({{ cartItems.length }})</h2>
+        <h2>CART ({{ totalItems }})</h2>
         <button class="remove-all" @click="removeAll">Remove all</button>
       </div>
 
-      <div class="cart-items">
+      <div v-if="cartItems.length > 0" class="cart-items">
         <div v-for="item in cartItems" :key="item.id" class="cart-item">
           <div class="item-image">
-            <img :src="require(`@/${item.image.mobile.slice(2)}`)" :alt="item.name" />
+            <img :src="require(`@/${item.image}`)" :alt="item.name" />
           </div>
           <div class="item-info">
-            <h3>{{ item.name.split(' ')[0] }}</h3>
+            <h3>{{ item.name }}</h3>
             <p class="price">$ {{ item.price.toLocaleString() }}</p>
           </div>
           <div class="quantity-selector">
-            <button @click="updateQuantity(item, item.quantity - 1)">-</button>
+            <button @click="decrementQuantity(item.id)">-</button>
             <span>{{ item.quantity }}</span>
-            <button @click="updateQuantity(item, item.quantity + 1)">+</button>
+            <button @click="incrementQuantity(item.id)">+</button>
           </div>
         </div>
       </div>
 
-      <div class="cart-total">
-        <span>TOTAL</span>
-        <span>$ {{ totalPrice.toLocaleString() }}</span>
+      <div v-else class="empty-cart">
+        <p>Your cart is empty</p>
       </div>
 
-      <router-link to="/checkout" class="checkout-button" @click="$emit('close')">
-        CHECKOUT
-      </router-link>
+      <template v-if="cartItems.length > 0">
+        <div class="cart-total">
+          <span>TOTAL</span>
+          <span>$ {{ total.toLocaleString() }}</span>
+        </div>
+
+        <router-link to="/checkout" class="checkout-button" @click="$emit('close')">
+          CHECKOUT
+        </router-link>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
+import { useCartStore } from '../stores/cart'
+import { storeToRefs } from 'pinia'
+
 export default {
   name: 'CartMenu',
   emits: ['close'],
-  data() {
+  setup() {
+    const cartStore = useCartStore()
+    const { cartItems, total, totalItems } = storeToRefs(cartStore)
+    const { removeAll, incrementQuantity, decrementQuantity } = cartStore
+
     return {
-      cartItems: [
-        {
-          id: 4,
-          name: 'XX99 MK II',
-          price: 2999,
-          image: {
-            mobile: './assets/product-xx99-mark-two-headphones/mobile/image-product.jpg'
-          },
-          quantity: 1
-        },
-        {
-          id: 2,
-          name: 'XX59',
-          price: 899,
-          image: {
-            mobile: './assets/product-xx59-headphones/mobile/image-product.jpg'
-          },
-          quantity: 2
-        },
-        {
-          id: 1,
-          name: 'YX1',
-          price: 599,
-          image: {
-            mobile: './assets/product-yx1-earphones/mobile/image-product.jpg'
-          },
-          quantity: 1
-        }
-      ]
-    }
-  },
-  computed: {
-    totalPrice() {
-      return this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0)
-    }
-  },
-  methods: {
-    removeAll() {
-      this.cartItems = []
-    },
-    updateQuantity(item, newQuantity) {
-      if (newQuantity < 1) {
-        this.cartItems = this.cartItems.filter(i => i.id !== item.id)
-      } else {
-        item.quantity = newQuantity
-      }
+      cartItems,
+      total,
+      totalItems,
+      removeAll,
+      incrementQuantity,
+      decrementQuantity
     }
   }
 }
@@ -121,6 +94,12 @@ export default {
   background: white;
   border-radius: 8px;
   padding: 32px 28px;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 32px 0;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .cart-header {

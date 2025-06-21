@@ -16,6 +16,7 @@
         </div>
         <button class="cart" @click="toggleCart">
           <img src="../assets/shared/desktop/icon-cart.svg" alt="Cart" />
+          <span v-if="totalItems > 0" class="cart-count">{{ totalItems }}</span>
         </button>
       </nav>
     </div>
@@ -45,6 +46,8 @@
 
 <script>
 import { ref } from 'vue'
+import { useCartStore } from '../stores/cart'
+import { storeToRefs } from 'pinia'
 import CartMenu from './CartMenu.vue'
 
 export default {
@@ -60,6 +63,9 @@ export default {
       { name: 'SPEAKERS', link: '/category/speakers' },
       { name: 'EARPHONES', link: '/category/earphones' }
     ]
+
+    const cartStore = useCartStore()
+    const { totalItems } = storeToRefs(cartStore)
 
     const toggleCart = () => {
       isCartOpen.value = !isCartOpen.value
@@ -84,7 +90,8 @@ export default {
       toggleMobileMenu,
       closeMenu,
       closeCart,
-      categories
+      categories,
+      totalItems
     }
   }
 }
@@ -171,6 +178,7 @@ export default {
   padding: 0;
   cursor: pointer;
   transition: opacity 0.3s ease;
+  position: relative;
 }
 
 .cart:hover {
@@ -180,6 +188,23 @@ export default {
 .cart img {
   width: 23px;
   height: 20px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #D87D4A;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
 }
 
 /* Mobile Menu Styles */
