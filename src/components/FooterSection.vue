@@ -13,20 +13,20 @@
       </div>
 
       <div class="footer-main">
-        <div class="footer-info">
-          <p class="description">Audiophile is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we're open 7 days a week.</p>
+        <p class="description">Audiophile is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we're open 7 days a week.</p>
+        <div class="footer-bottom">
           <p class="copyright">Copyright 2021. All Rights Reserved</p>
-        </div>
-        <div class="social-links">
-          <a href="#" class="social-link" aria-label="Facebook">
-            <img src="@/assets/shared/desktop/icon-facebook.svg" alt="Facebook" />
-          </a>
-          <a href="#" class="social-link" aria-label="Twitter">
-            <img src="@/assets/shared/desktop/icon-twitter.svg" alt="Twitter" />
-          </a>
-          <a href="#" class="social-link" aria-label="Instagram">
-            <img src="@/assets/shared/desktop/icon-instagram.svg" alt="Instagram" />
-          </a>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <img src="@/assets/shared/desktop/icon-facebook.svg" alt="Facebook" />
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <img src="@/assets/shared/desktop/icon-twitter.svg" alt="Twitter" />
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <img src="@/assets/shared/desktop/icon-instagram.svg" alt="Instagram" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -96,13 +96,8 @@ export default {
 
 .footer-main {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.footer-info {
-  max-width: 540px;
-  text-align: left;
+  flex-direction: column;
+  gap: 56px;
 }
 
 .description {
@@ -110,8 +105,15 @@ export default {
   font-size: 15px;
   line-height: 25px;
   font-weight: 500;
-  margin-bottom: 56px;
   opacity: 0.5;
+  max-width: 100%;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .copyright {
@@ -120,6 +122,7 @@ export default {
   line-height: 25px;
   font-weight: 700;
   opacity: 0.5;
+  margin: 0;
 }
 
 .social-links {
@@ -143,39 +146,37 @@ export default {
   height: 24px;
 }
 
-@media (min-width: 768px) {
-  .footer-top {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0;
-  }
-
-  .footer-nav {
-    flex-direction: row;
-  }
-}
-
-@media (max-width: 768px) {
+@media (min-width: 768px) and (max-width: 1199px) {
   .footer {
     padding: 60px 0 46px;
+  }
+
+  .footer-content {
+    padding: 0 40px;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: 32px;
   }
 
   .orange-line {
     top: -60px;
   }
 
-  .description {
-    margin-bottom: 80px;
+  .footer-nav {
+    flex-direction: row;
+    gap: 34px;
   }
 
   .footer-main {
-    flex-direction: column;
     gap: 32px;
   }
 
-  .social-links {
-    align-self: flex-end;
+  .description {
+    max-width: 100%;
   }
 }
 
@@ -196,18 +197,27 @@ export default {
     align-items: center;
   }
 
-  .orange-line {
-    left: 50%;
-    transform: translateX(-50%);
-    top: -52px;
-  }
-
   .footer-main {
+    text-align: center;
     gap: 48px;
   }
 
+  .footer-bottom {
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .copyright {
+    text-align: center;
+  }
+
   .social-links {
-    align-self: center;
+    justify-content: center;
+  }
+
+  .orange-line {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 </style> 
