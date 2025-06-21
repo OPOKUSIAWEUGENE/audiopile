@@ -6,6 +6,7 @@ import About from '../views/AboutPage.vue';
 import Dashboard from '../views/DashboardPage.vue';
 import Headphones from '../views/HeadphonesPage.vue';
 import Speakers from '../views/SpeakersPage.vue';
+import Earphones from '../views/EarphonesPage.vue';
 
 const routes = [
   {
@@ -24,6 +25,12 @@ const routes = [
     path: '/category/speakers',
     name: 'Speakers',
     component: Speakers,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/category/earphones',
+    name: 'Earphones',
+    component: Earphones,
     meta: { requiresAuth: false },
   },
   {
@@ -49,6 +56,9 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(), // or createWebHashHistory()
   routes,
+  scrollBehavior() {
+    return { top: 0 }
+  }
 });
 
 export default router;
