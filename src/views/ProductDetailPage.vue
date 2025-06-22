@@ -29,36 +29,38 @@
         </div>
       </div>
 
-      <div class="product-features" v-if="product">
-        <h2>FEATURES</h2>
-        <p>{{ product.features }}</p>
-      </div>
+      <div class="features-box" v-if="product">
+        <div class="product-features">
+          <h2>FEATURES</h2>
+          <p>{{ product.features }}</p>
+        </div>
 
-      <div class="in-the-box" v-if="product">
-        <h2>IN THE BOX</h2>
-        <ul>
-          <li v-for="item in product.includes" :key="item.item">
-            <span class="quantity">{{ item.quantity }}x</span>
-            <span class="item">{{ item.item }}</span>
-          </li>
-        </ul>
+        <div class="in-the-box">
+          <h2>IN THE BOX</h2>
+          <ul>
+            <li v-for="item in product.includes" :key="item.item">
+              <span class="quantity">{{ item.quantity }}x</span>
+              <span class="item">{{ item.item }}</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="product-gallery" v-if="product">
         <picture class="gallery-item">
           <source :srcset="require(`@/${product.gallery.first.desktop.slice(2)}`)" media="(min-width: 1110px)" />
           <source :srcset="require(`@/${product.gallery.first.tablet.slice(2)}`)" media="(min-width: 768px)" />
-          <img :src="require(`@/${product.gallery.first.mobile.slice(2)}`)" alt="" />
+          <img :src="require(`@/${product.gallery.first.mobile.slice(2)}`)" alt="Gallery image 1" />
         </picture>
         <picture class="gallery-item">
           <source :srcset="require(`@/${product.gallery.second.desktop.slice(2)}`)" media="(min-width: 1110px)" />
           <source :srcset="require(`@/${product.gallery.second.tablet.slice(2)}`)" media="(min-width: 768px)" />
-          <img :src="require(`@/${product.gallery.second.mobile.slice(2)}`)" alt="" />
+          <img :src="require(`@/${product.gallery.second.mobile.slice(2)}`)" alt="Gallery image 2" />
         </picture>
         <picture class="gallery-item">
           <source :srcset="require(`@/${product.gallery.third.desktop.slice(2)}`)" media="(min-width: 1110px)" />
           <source :srcset="require(`@/${product.gallery.third.tablet.slice(2)}`)" media="(min-width: 768px)" />
-          <img :src="require(`@/${product.gallery.third.mobile.slice(2)}`)" alt="" />
+          <img :src="require(`@/${product.gallery.third.mobile.slice(2)}`)" alt="Gallery image 3" />
         </picture>
       </div>
 
@@ -78,42 +80,41 @@
       </div>
 
       <CategoryCards :categories="categories" />
-      
       <InfoSection />
-    
     </div>
+    
     <FooterSection>
-        <template #nav>
-          <div>
-            <strong>audiophile</strong>
-            <nav>
-              <router-link to="/">HOME</router-link>
-              <router-link to="/category/headphones">HEADPHONES</router-link>
-              <router-link to="/category/speakers">SPEAKERS</router-link>
-              <router-link to="/category/earphones">EARPHONES</router-link>
-            </nav>
-          </div>
-        </template>
-        <template #info>
-          <p>Audiophile is an all-in-one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we're open 7 days a week.</p>
-        </template>
-        <template #copyright>
-          <small>Copyright 2021. All Rights Reserved</small>
-        </template>
-        <template #socials>
-          <div class="social-links">
-            <a href="#" aria-label="Facebook">
-              <img src="@/assets/shared/desktop/icon-facebook.svg" alt="" />
-            </a>
-            <a href="#" aria-label="Twitter">
-              <img src="@/assets/shared/desktop/icon-twitter.svg" alt="" />
-            </a>
-            <a href="#" aria-label="Instagram">
-              <img src="@/assets/shared/desktop/icon-instagram.svg" alt="" />
-            </a>
-          </div>
-        </template>
-      </FooterSection>
+      <template #nav>
+        <div>
+          <strong>audiophile</strong>
+          <nav>
+            <router-link to="/">HOME</router-link>
+            <router-link to="/category/headphones">HEADPHONES</router-link>
+            <router-link to="/category/speakers">SPEAKERS</router-link>
+            <router-link to="/category/earphones">EARPHONES</router-link>
+          </nav>
+        </div>
+      </template>
+      <template #info>
+        <p>Audiophile is an all-in-one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we're open 7 days a week.</p>
+      </template>
+      <template #copyright>
+        <small>Copyright 2021. All Rights Reserved</small>
+      </template>
+      <template #socials>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">
+            <img src="@/assets/shared/desktop/icon-facebook.svg" alt="" />
+          </a>
+          <a href="#" aria-label="Twitter">
+            <img src="@/assets/shared/desktop/icon-twitter.svg" alt="" />
+          </a>
+          <a href="#" aria-label="Instagram">
+            <img src="@/assets/shared/desktop/icon-instagram.svg" alt="" />
+          </a>
+        </div>
+      </template>
+    </FooterSection>
   </div>
 </template>
 
@@ -304,8 +305,12 @@ h1 {
   background-color: #FBAF85;
 }
 
-.product-features {
+.features-box {
   margin-bottom: 88px;
+}
+
+.product-features {
+  margin-bottom: 24px;
 }
 
 .product-features h2,
@@ -642,6 +647,7 @@ h1 {
 
   .go-back {
     margin-bottom: 56px;
+    margin-top: 79px;
   }
 
   .product-main {
@@ -649,23 +655,142 @@ h1 {
     margin-bottom: 160px;
   }
 
-  .product-features {
+  .product-image {
+    max-width: 540px;
+  }
+
+  .product-info {
+    max-width: 445px;
+  }
+
+  h1 {
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: 1.43px;
+  }
+
+  .description {
+    font-size: 15px;
+    line-height: 25px;
+    opacity: 0.5;
+  }
+
+  .features-box {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 635px 350px;
     gap: 125px;
     margin-bottom: 160px;
   }
 
+  .product-features {
+    margin-bottom: 0;
+  }
+
+  .product-features h2 {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: 1.14px;
+    margin-bottom: 32px;
+  }
+
+  .product-features p {
+    opacity: 0.5;
+  }
+
   .in-the-box {
-    margin-bottom: 160px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+
+  .in-the-box h2 {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: 1.14px;
+    margin-bottom: 32px;
+  }
+
+  .in-the-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .in-the-box li {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 8px;
+  }
+
+  .in-the-box li:last-child {
+    margin-bottom: 0;
+  }
+
+  .in-the-box .quantity {
+    color: #D87D4A;
+    font-weight: 700;
+    min-width: 25px;
+  }
+
+  .in-the-box .item {
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 500;
   }
 
   .product-gallery {
+    display: grid;
+    grid-template-columns: 445px 635px;
+    grid-template-rows: 280px 280px;
+    gap: 32px;
     margin-bottom: 160px;
   }
 
+  .gallery-item:nth-child(1),
+  .gallery-item:nth-child(2) {
+    height: 280px;
+  }
+
+  .gallery-item:nth-child(3) {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    height: 592px;
+  }
+
+  .gallery-item img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .you-may-also-like {
+    margin-bottom: 160px;
+  }
+
+  .you-may-also-like h2 {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: 1.14px;
+    margin-bottom: 64px;
+  }
+
   .suggestions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+  }
+
+  .suggestion-item picture {
+    width: 350px;
+    height: 318px;
+    margin-bottom: 40px;
+  }
+
+  .suggestion-item img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .suggestion-item h3 {
+    margin-bottom: 32px;
   }
 
   .category-cards {
@@ -673,10 +798,6 @@ h1 {
   }
 
   .info-section {
-    margin-bottom: 160px;
-  }
-
-  .categories {
     margin-bottom: 160px;
   }
 }
