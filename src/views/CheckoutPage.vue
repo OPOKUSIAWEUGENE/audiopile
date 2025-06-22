@@ -79,6 +79,10 @@
             </template>
           </div>
         </section>
+
+        <div class="visually-hidden">
+          <button type="submit" ref="submitButton"></button>
+        </div>
       </form>
 
       <div class="summary">
@@ -115,15 +119,20 @@
           </div>
         </div>
 
-        <button type="submit" class="continue-pay" :disabled="!cartStore.items.length">
+        <button 
+          type="button"
+          class="continue-pay" 
+          :disabled="!cartStore.items.length"
+          @click="showOrderConfirmation"
+        >
           CONTINUE & PAY
         </button>
       </div>
     </div>
 
     <OrderConfirmationModal 
-      :show="showConfirmation" 
       v-if="showConfirmation"
+      :show="true"
     />
   </div>
 
@@ -182,7 +191,10 @@ export default {
     })
 
     const handleSubmit = () => {
-      // In a real app, you would validate the form and process the payment here
+      showConfirmation.value = true
+    }
+
+    const showOrderConfirmation = () => {
       showConfirmation.value = true
     }
 
@@ -190,7 +202,8 @@ export default {
       cartStore,
       formData,
       showConfirmation,
-      handleSubmit
+      handleSubmit,
+      showOrderConfirmation
     }
   }
 }
@@ -669,5 +682,17 @@ input[type="password"]:focus {
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   grid-column: 1 / -1;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 </style> 
