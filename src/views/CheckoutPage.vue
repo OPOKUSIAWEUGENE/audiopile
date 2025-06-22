@@ -311,6 +311,13 @@ input[type="password"]:focus {
   outline: none;
 }
 
+.payment-method {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
 .radio-group {
   display: flex;
   flex-direction: column;
@@ -580,7 +587,17 @@ input[type="password"]:focus {
   }
 
   .payment-method {
-    grid-column: 1 / -1;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .payment-method > label {
+    margin-top: 18px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: -0.21px;
   }
 
   .radio-group {
@@ -589,6 +606,25 @@ input[type="password"]:focus {
 
   .radio-label {
     padding: 18px 24px;
+    border-radius: 8px;
+    border: 1px solid #CFCFCF;
+    transition: border-color 0.3s ease;
+  }
+
+  .radio-label:hover {
+    border-color: #D87D4A;
+  }
+
+  .radio-label input[type="radio"] {
+    width: 20px;
+    height: 20px;
+  }
+
+  .radio-label span {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.25px;
+    color: #000000;
   }
 
   .cash-on-delivery {
@@ -626,5 +662,12 @@ input[type="password"]:focus {
   .continue-pay {
     height: 48px;
   }
+}
+
+.form-group.e-money-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  grid-column: 1 / -1;
 }
 </style> 
