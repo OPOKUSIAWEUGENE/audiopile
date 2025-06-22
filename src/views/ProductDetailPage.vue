@@ -707,7 +707,7 @@ h1 {
     font-size: 32px;
     line-height: 36px;
     letter-spacing: 1.14px;
-    margin-bottom: 32px;
+    margin-bottom: 4px;
   }
 
   .in-the-box ul {
@@ -718,8 +718,10 @@ h1 {
 
   .in-the-box li {
     display: flex;
-    gap: 24px;
-    margin-bottom: 8px;
+    gap: 21px;
+    margin-bottom: 2px;
+    font-size: 15px;
+    line-height: 25px;
   }
 
   .in-the-box li:last-child {

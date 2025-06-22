@@ -3,8 +3,6 @@
     <div class="container">
       <button class="go-back" @click="$router.go(-1)">Go Back</button>
       
-   
-      
       <form @submit.prevent="handleSubmit" class="checkout-form">
         <h1>CHECKOUT</h1>
         <section class="billing-details">
@@ -81,46 +79,46 @@
             </template>
           </div>
         </section>
-
-        <div class="summary">
-          <h2>SUMMARY</h2>
-          <div class="cart-items">
-            <div v-for="item in cartStore.items" :key="item.id" class="cart-item">
-              <div class="item-image">
-                <img :src="require(`@/${item.image}`)" :alt="item.name" />
-              </div>
-              <div class="item-details">
-                <h3>{{ item.name }}</h3>
-                <p class="price">$ {{ item.price.toLocaleString() }}</p>
-              </div>
-              <span class="quantity">x{{ item.quantity }}</span>
-            </div>
-          </div>
-
-          <div class="summary-totals">
-            <div class="summary-row">
-              <span>TOTAL</span>
-              <span class="amount">$ {{ cartStore.total?.toLocaleString() || '0' }}</span>
-            </div>
-            <div class="summary-row">
-              <span>SHIPPING</span>
-              <span class="amount">$ 50</span>
-            </div>
-            <div class="summary-row">
-              <span>VAT (INCLUDED)</span>
-              <span class="amount">$ {{ ((cartStore.total || 0) * 0.2).toLocaleString() }}</span>
-            </div>
-            <div class="summary-row grand-total">
-              <span>GRAND TOTAL</span>
-              <span class="amount">$ {{ ((cartStore.total || 0) + 50).toLocaleString() }}</span>
-            </div>
-          </div>
-
-          <button type="submit" class="continue-pay" :disabled="!cartStore.items.length">
-            CONTINUE & PAY
-          </button>
-        </div>
       </form>
+
+      <div class="summary">
+        <h2>SUMMARY</h2>
+        <div class="cart-items">
+          <div v-for="item in cartStore.items" :key="item.id" class="cart-item">
+            <div class="item-image">
+              <img :src="require(`@/${item.image}`)" :alt="item.name" />
+            </div>
+            <div class="item-details">
+              <h3>{{ item.name }}</h3>
+              <p class="price">$ {{ item.price.toLocaleString() }}</p>
+            </div>
+            <span class="quantity">x{{ item.quantity }}</span>
+          </div>
+        </div>
+
+        <div class="summary-totals">
+          <div class="summary-row">
+            <span>TOTAL</span>
+            <span class="amount">$ {{ cartStore.total?.toLocaleString() || '0' }}</span>
+          </div>
+          <div class="summary-row">
+            <span>SHIPPING</span>
+            <span class="amount">$ 50</span>
+          </div>
+          <div class="summary-row">
+            <span>VAT (INCLUDED)</span>
+            <span class="amount">$ {{ ((cartStore.total || 0) * 0.2).toLocaleString() }}</span>
+          </div>
+          <div class="summary-row grand-total">
+            <span>GRAND TOTAL</span>
+            <span class="amount">$ {{ ((cartStore.total || 0) + 50).toLocaleString() }}</span>
+          </div>
+        </div>
+
+        <button type="submit" class="continue-pay" :disabled="!cartStore.items.length">
+          CONTINUE & PAY
+        </button>
+      </div>
     </div>
 
     <OrderConfirmationModal 
@@ -130,29 +128,29 @@
   </div>
 
   <FooterSection>
-      <template #nav>
-        <div>
-          <strong>audiophile</strong>
-          <nav>
-            <router-link to="/">HOME</router-link>
-            <router-link to="/category/headphones">HEADPHONES</router-link>
-            <router-link to="/category/speakers">SPEAKERS</router-link>
-            <router-link to="/category/earphones">EARPHONES</router-link>
-          </nav>
-        </div>
-      </template>
-      <template #info>
-        <p>Audiophile is an all-in-one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we're open 7 days a week.</p>
-      </template>
-      <template #copyright>
-        <small>Copyright 2021. All Rights Reserved</small>
-      </template>
-      <template #socials>
-        <a href="#"><img src="@/assets/shared/desktop/icon-facebook.svg" alt="Facebook" /></a>
-        <a href="#"><img src="@/assets/shared/desktop/icon-twitter.svg" alt="Twitter" /></a>
-        <a href="#"><img src="@/assets/shared/desktop/icon-instagram.svg" alt="Instagram" /></a>
-      </template>
-    </FooterSection>
+    <template #nav>
+      <div>
+        <strong>audiophile</strong>
+        <nav>
+          <router-link to="/">HOME</router-link>
+          <router-link to="/category/headphones">HEADPHONES</router-link>
+          <router-link to="/category/speakers">SPEAKERS</router-link>
+          <router-link to="/category/earphones">EARPHONES</router-link>
+        </nav>
+      </div>
+    </template>
+    <template #info>
+      <p>Audiophile is an all-in-one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we're open 7 days a week.</p>
+    </template>
+    <template #copyright>
+      <small>Copyright 2021. All Rights Reserved</small>
+    </template>
+    <template #socials>
+      <a href="#"><img src="@/assets/shared/desktop/icon-facebook.svg" alt="Facebook" /></a>
+      <a href="#"><img src="@/assets/shared/desktop/icon-twitter.svg" alt="Twitter" /></a>
+      <a href="#"><img src="@/assets/shared/desktop/icon-instagram.svg" alt="Instagram" /></a>
+    </template>
+  </FooterSection>
 </template>
 
 <script>
@@ -537,21 +535,96 @@ input[type="password"]:focus {
 
 @media (min-width: 1110px) {
   .checkout-page {
-    padding: 79px 165px 141px;
+    padding: 79px 0 141px;
   }
 
   .container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 730px 350px;
     gap: 30px;
-  }
-
-  h1 {
-    grid-column: 1 / -1;
+    align-items: start;
   }
 
   .go-back {
     grid-column: 1 / -1;
+    margin-bottom: 38px;
+  }
+
+  .checkout-form {
+    padding: 54px 48px 48px;
+    margin-bottom: 0;
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  section {
+    margin-bottom: 53px;
+  }
+
+  h1 {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: 1.14px;
+    margin-bottom: 41px;
+  }
+
+  h2 {
+    margin-bottom: 16px;
+  }
+
+  .form-group {
+    gap: 9px;
+  }
+
+  .payment-method {
+    grid-column: 1 / -1;
+  }
+
+  .radio-group {
+    gap: 16px;
+  }
+
+  .radio-label {
+    padding: 18px 24px;
+  }
+
+  .cash-on-delivery {
+    margin-top: 30px;
+    gap: 32px;
+  }
+
+  .summary {
+    padding: 32px;
+    position: sticky;
+    top: 24px;
+    height: fit-content;
+  }
+
+  .cart-items {
+    margin-bottom: 32px;
+  }
+
+  .cart-item {
+    margin-bottom: 24px;
+  }
+
+  .summary-totals {
+    margin-bottom: 32px;
+  }
+
+  .summary-row {
+    margin-bottom: 8px;
+  }
+
+  .grand-total {
+    margin-top: 16px;
+  }
+
+  .continue-pay {
+    height: 48px;
   }
 }
 </style> 
