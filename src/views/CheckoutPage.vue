@@ -202,6 +202,7 @@ export default {
   background-color: #FAFAFA;
   padding: 16px 24px 97px;
   min-height: 100vh;
+  margin-top: 89px;
 }
 
 .container {
@@ -511,6 +512,7 @@ input[type="password"]:focus {
 @media (min-width: 768px) {
   .checkout-page {
     padding: 48px 40px 116px;
+    margin-top: 97px;
   }
 
   .form-grid {
@@ -519,6 +521,16 @@ input[type="password"]:focus {
 
   .payment-method {
     grid-column: 1 / -1;
+  }
+
+  h1 {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: 1.14px;
+  }
+
+  .checkout-form {
+    padding: 30px;
   }
 }
 
