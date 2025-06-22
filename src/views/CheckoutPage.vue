@@ -115,14 +115,17 @@
             </div>
           </div>
 
-          <button type="submit" class="continue-pay">
+          <button type="submit" class="continue-pay" :disabled="!cartStore.items.length">
             CONTINUE & PAY
           </button>
         </div>
       </form>
     </div>
 
-    <OrderConfirmationModal :show="showConfirmation" />
+    <OrderConfirmationModal 
+      :show="showConfirmation" 
+      v-if="showConfirmation"
+    />
   </div>
 
   <FooterSection>

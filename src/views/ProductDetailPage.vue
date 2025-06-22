@@ -80,7 +80,9 @@
       <CategoryCards :categories="categories" />
       
       <InfoSection />
-      <FooterSection>
+    
+    </div>
+    <FooterSection>
         <template #nav>
           <div>
             <strong>audiophile</strong>
@@ -112,7 +114,6 @@
           </div>
         </template>
       </FooterSection>
-    </div>
   </div>
 </template>
 
@@ -428,6 +429,145 @@ h1 {
   margin-bottom: 120px;
 }
 
+/* Add cart modal styles for tablet */
+:deep(.cart-content) {
+  position: absolute;
+  top: 90px;
+  right: 40px;
+  width: 377px;
+  background: white;
+  border-radius: 8px;
+  padding: 32px;
+}
+
+:deep(.cart-header) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+:deep(.cart-header h2) {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1.29px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+:deep(.cart-items) {
+  margin-bottom: 32px;
+}
+
+:deep(.cart-item) {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+:deep(.cart-item:last-child) {
+  margin-bottom: 0;
+}
+
+:deep(.item-image) {
+  width: 64px;
+  height: 64px;
+  background: #F1F1F1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+:deep(.item-image img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+:deep(.item-info h3) {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+:deep(.item-info .price) {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+
+:deep(.quantity-selector) {
+  display: flex;
+  align-items: center;
+  background: #F1F1F1;
+  padding: 15px;
+  gap: 20px;
+}
+
+:deep(.quantity-selector button) {
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+:deep(.quantity-selector button:hover) {
+  color: #D87D4A;
+}
+
+:deep(.quantity-selector span) {
+  font-size: 13px;
+  font-weight: 700;
+  min-width: 16px;
+  text-align: center;
+}
+
+:deep(.cart-total) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+:deep(.cart-total span) {
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+:deep(.cart-total span:first-child) {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:deep(.total-amount) {
+  font-weight: 700;
+  font-size: 18px !important;
+}
+
+:deep(.checkout-button) {
+  display: block;
+  width: 100%;
+  background: #D87D4A;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+:deep(.checkout-button:hover) {
+  background: #FBAF85;
+}
+
 @media (min-width: 768px) {
   .container {
     padding: 0 40px;
@@ -538,6 +678,13 @@ h1 {
 
   .categories {
     margin-bottom: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  :deep(.cart-content) {
+    right: 50%;
+    transform: translateX(50%);
   }
 }
 </style> 

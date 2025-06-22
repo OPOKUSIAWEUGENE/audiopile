@@ -70,7 +70,7 @@ export default {
 
 .cart-overlay {
   position: absolute;
-  top: 0;
+  top: 89px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -79,20 +79,20 @@ export default {
 
 .cart-content {
   position: absolute;
-  top: 90px;
-  right: 24px;
-  width: calc(100% - 48px);
-  max-width: 377px;
+  top: 89px;
+  right: 40px;
+  width: 377px;
   background: white;
   border-radius: 8px;
-  padding: 32px 28px;
+  padding: 31px 28px;
+  margin-top: 24px;
 }
 
 .cart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 31px;
 }
 
 .cart-header h2 {
@@ -129,7 +129,7 @@ export default {
 
 .cart-item {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 64px 1fr 96px;
   gap: 16px;
   align-items: center;
   margin-bottom: 24px;
@@ -167,33 +167,33 @@ export default {
 }
 
 .quantity-selector {
+  width: 96px;
+  height: 32px;
+  background: #F1F1F1;
   display: flex;
   align-items: center;
-  background: #F1F1F1;
-  padding: 15px;
-  gap: 20px;
+  justify-content: space-between;
+  padding: 0 12px;
 }
 
-.quantity-btn {
+.quantity-selector button {
   background: none;
   border: none;
   color: rgba(0, 0, 0, 0.25);
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
-  padding: 0;
-  transition: color 0.3s ease;
+  padding: 8px;
+  margin: -8px;
 }
 
-.quantity-btn:hover {
+.quantity-selector button:hover {
   color: #D87D4A;
 }
 
 .quantity-selector span {
   font-size: 13px;
   font-weight: 700;
-  min-width: 16px;
-  text-align: center;
 }
 
 .cart-total {
@@ -220,6 +220,7 @@ export default {
 .checkout-button {
   display: block;
   width: 100%;
+  height: 48px;
   background: #D87D4A;
   color: white;
   text-align: center;
@@ -236,7 +237,73 @@ export default {
   background: #FBAF85;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  .cart-content {
+    width: 480px;
+    padding: 42px;
+  }
+
+  .cart-header {
+    margin-bottom: 32px;
+  }
+
+  .cart-header h2 {
+    font-size: 20px;
+    letter-spacing: 1.5px;
+  }
+
+  .cart-item {
+    grid-template-columns: 84px 1fr 116px;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  .item-image {
+    width: 84px;
+    height: 84px;
+  }
+
+  .item-info h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .item-info .price {
+    font-size: 15px;
+  }
+
+  .quantity-selector {
+    width: 116px;
+    height: 38px;
+  }
+
+  .quantity-selector button {
+    font-size: 15px;
+  }
+
+  .quantity-selector span {
+    font-size: 15px;
+  }
+
+  .cart-total {
+    margin-bottom: 32px;
+  }
+
+  .cart-total span {
+    font-size: 16px;
+  }
+
+  .total-amount {
+    font-size: 20px !important;
+  }
+
+  .checkout-button {
+    height: 52px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 767px) {
   .cart-content {
     right: 50%;
     transform: translateX(50%);
