@@ -19,102 +19,48 @@
           <div class="items-summary">
             <div class="main-item">
               <div class="item-info">
-                <img 
-                  v-if="firstItem?.image"
-                  :src="require(`@/${firstItem.image}`)" 
-                  :alt="firstItem.name" 
-                  class="item-image" 
-                />
-                <img 
-                  v-else
-                  src="@/assets/shared/desktop/image-category-thumbnail-headphones.png" 
-                  alt="Default product" 
-                  class="item-image" 
-                />
-                <div class="item-details">
-                  <h3>{{ formatProductName(firstItem?.name || '') }}</h3>
-                  <p class="price">$ {{ Number(firstItem?.price || 0).toLocaleString() }}</p>
+                <div class="product-icon">
+                  <img src="@/assets/shared/desktop/image-category-thumbnail-headphones.png" alt="Headphones" />
                 </div>
-                <span class="quantity">x{{ firstItem?.quantity || 0 }}</span>
+                <div class="item-details">
+                  <h3>XX99 MK II</h3>
+                  <p class="price">$ 2,999</p>
+                </div>
+                <span class="quantity">x1</span>
               </div>
               
-              <div v-if="otherItemsCount > 0" class="other-items">
-                <div class="divider"></div>
-                <p>and {{ otherItemsCount }} other item(s)</p>
-              </div>
+              <div class="divider"></div>
+              <p class="other-items">and 2 other item(s)</p>
             </div>
+          </div>
 
-            <div class="grand-total">
-              <span>GRAND TOTAL</span>
-              <span class="amount">$ {{ Number(grandTotal).toLocaleString() }}</span>
-            </div>
+          <div class="grand-total">
+            <span>GRAND TOTAL</span>
+            <span class="amount">$ 5,446</span>
           </div>
         </div>
 
-        <router-link to="/" custom v-slot="{ navigate }">
-          <button class="back-home" @click="handleBackToHome(navigate)">
-            BACK TO HOME
-          </button>
-        </router-link>
+        <button class="back-home" @click="$router.push('/')">
+          BACK TO HOME
+        </button>
       </div>
     </div>
   </Transition>
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
-import { useCartStore } from '@/stores/cart'
-
 export default {
   name: 'OrderConfirmationModal',
   props: {
     show: {
       type: Boolean,
-      required: true
-    }
-  },
-  setup() {
-    const router = useRouter()
-    const cartStore = useCartStore()
-    return { router, cartStore }
-  },
-  computed: {
-    firstItem() {
-      return this.cartStore.items[0] || {}
-    },
-    otherItemsCount() {
-      return Math.max(0, this.cartStore.items.length - 1)
-    },
-    grandTotal() {
-      return (this.cartStore.total || 0) + 50 // Adding shipping cost
-    }
-  },
-  methods: {
-    formatProductName(name) {
-      if (!name) return ''
-      return name.split(' ').slice(0, -1).join(' ')
-    },
-    handleBackToHome(navigate) {
-      // First clear the cart
-      this.cartStore.clearCart()
-      // Then navigate home
-      navigate()
+      default: false
     }
   }
 }
 </script>
 
 <style scoped>
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.modal-enter-from,
-.modal-leave-to {
-  opacity: 0;
-}
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -129,13 +75,12 @@ export default {
 }
 
 .modal-content {
-  background: white;
+  background: #FFFFFF;
   border-radius: 8px;
-  padding: 32px;
-  width: calc(100% - 48px);
+  padding: 48px;
+  width: 100%;
   max-width: 540px;
-  margin: 24px;
-  margin-top: 120px;
+  margin-top: 124px;
 }
 
 .check-icon {
@@ -146,20 +91,20 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 23px;
+  margin-bottom: 33px;
 }
 
 .check-icon img {
   width: 26px;
-  height: 26px;
+  height: 19px;
 }
 
 .title {
-  font-size: 24px;
-  line-height: 28px;
-  letter-spacing: 0.86px;
+  font-size: 32px;
+  line-height: 36px;
+  letter-spacing: 1.14px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   color: #000000;
 }
 
@@ -167,22 +112,26 @@ export default {
   color: rgba(0, 0, 0, 0.5);
   font-size: 15px;
   line-height: 25px;
-  margin-bottom: 24px;
+  margin-bottom: 33px;
   font-weight: 500;
 }
 
 .order-summary {
-  margin-bottom: 23px;
+  margin-bottom: 46px;
+  display: flex;
   border-radius: 8px;
   overflow: hidden;
 }
 
 .items-summary {
-  background: #F1F1F1;
+  flex: 1.5;
 }
 
 .main-item {
+  background: #F1F1F1;
   padding: 24px;
+  height: 100%;
+  border-radius: 8px 0 0 8px;
 }
 
 .item-info {
@@ -192,12 +141,26 @@ export default {
   align-items: center;
 }
 
-.item-image {
+.product-icon {
   width: 50px;
   height: 50px;
-  border-radius: 8px;
-  object-fit: cover;
   background: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.product-icon img {
+  width: 100%;
+  height: auto;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .item-details h3 {
@@ -221,6 +184,7 @@ export default {
   line-height: 25px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.5);
+  margin-left: auto;
 }
 
 .divider {
@@ -233,18 +197,20 @@ export default {
   text-align: center;
   font-size: 12px;
   line-height: 16px;
-  font-weight: 700;
+  font-weight: 500;
   color: rgba(0, 0, 0, 0.5);
+  margin: 0;
 }
 
 .grand-total {
+  flex: 1;
   background: #000000;
+  padding: 42px 24px;
   color: #FFFFFF;
-  padding: 15px 24px;
-}
-
-.grand-total span {
-  display: block;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .grand-total span:first-child {
@@ -280,6 +246,7 @@ export default {
   background: #FBAF85;
 }
 
+/* Mobile Layout */
 @media (max-width: 767px) {
   .modal-content {
     margin: 24px;
@@ -287,26 +254,34 @@ export default {
     margin-top: 103px;
   }
 
-  .check-icon {
-    margin-bottom: 23px;
-  }
-
   .title {
     font-size: 24px;
     line-height: 28px;
-    margin-bottom: 16px;
-  }
-
-  .confirmation-message {
-    margin-bottom: 24px;
+    letter-spacing: 0.86px;
   }
 
   .order-summary {
-    margin-bottom: 23px;
+    flex-direction: column;
   }
 
   .main-item {
-    padding: 24px;
+    border-radius: 8px 8px 0 0;
   }
+
+  .grand-total {
+    border-radius: 0 0 8px 8px;
+    padding: 15px 24px;
+  }
+}
+
+/* Animation */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
 }
 </style> 
