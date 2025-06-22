@@ -3,12 +3,12 @@
     <div class="cart-overlay" @click="$emit('close')"></div>
     <div class="cart-content">
       <div class="cart-header">
-        <h2>CART ({{ cartItems.length }})</h2>
-        <button v-if="cartItems.length > 0" class="remove-all" @click="removeAll">Remove all</button>
+        <h2>CART ({{ cartStore.totalItems }})</h2>
+        <button v-if="cartStore.items.length > 0" class="remove-all" @click="cartStore.removeAll">Remove all</button>
       </div>
 
-      <div v-if="cartItems.length > 0" class="cart-items">
-        <div v-for="item in cartItems" :key="item.id" class="cart-item">
+      <div v-if="cartStore.items.length > 0" class="cart-items">
+        <div v-for="item in cartStore.items" :key="item.id" class="cart-item">
           <div class="item-image">
             <img :src="require(`@/${item.image}`)" :alt="item.name" />
           </div>
@@ -17,9 +17,9 @@
             <p class="price">$ {{ item.price.toLocaleString() }}</p>
           </div>
           <div class="quantity-selector">
-            <button @click="decrementQuantity(item.id)" class="quantity-btn">-</button>
+            <button @click="cartStore.decrementQuantity(item.id)" class="quantity-btn">-</button>
             <span>{{ item.quantity }}</span>
-            <button @click="incrementQuantity(item.id)" class="quantity-btn">+</button>
+            <button @click="cartStore.incrementQuantity(item.id)" class="quantity-btn">+</button>
           </div>
         </div>
       </div>
@@ -28,10 +28,10 @@
         <p>Your cart is empty</p>
       </div>
 
-      <template v-if="cartItems.length > 0">
+      <template v-if="cartStore.items.length > 0">
         <div class="cart-total">
           <span>TOTAL</span>
-          <span class="total-amount">$ {{ total.toLocaleString() }}</span>
+          <span class="total-amount">$ {{ cartStore.total.toLocaleString() }}</span>
         </div>
 
         <router-link to="/checkout" class="checkout-button" @click="$emit('close')">
@@ -43,23 +43,16 @@
 </template>
 
 <script>
-import { useCartStore } from '../stores/cart'
-import { storeToRefs } from 'pinia'
+import { useCartStore } from '@/stores/cart'
 
 export default {
   name: 'CartMenu',
   emits: ['close'],
   setup() {
     const cartStore = useCartStore()
-    const { cartItems, total } = storeToRefs(cartStore)
-    const { removeAll, incrementQuantity, decrementQuantity } = cartStore
-
+    
     return {
-      cartItems,
-      total,
-      removeAll,
-      incrementQuantity,
-      decrementQuantity
+      cartStore
     }
   }
 }

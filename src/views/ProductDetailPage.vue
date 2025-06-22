@@ -24,7 +24,7 @@
               <span>{{ quantity }}</span>
               <button @click="quantity++">+</button>
             </div>
-            <button class="btn-primary">ADD TO CART</button>
+            <button class="btn-primary" @click="addToCart">ADD TO CART</button>
           </div>
         </div>
       </div>
@@ -77,41 +77,42 @@
         </div>
       </div>
 
-      <CategoryCards class="category-cards" />
-      <InfoSection class="info-section" />
+      <CategoryCards :categories="categories" />
+      
+      <InfoSection />
+      <FooterSection>
+        <template #nav>
+          <div>
+            <strong>audiophile</strong>
+            <nav>
+              <router-link to="/">HOME</router-link>
+              <router-link to="/category/headphones">HEADPHONES</router-link>
+              <router-link to="/category/speakers">SPEAKERS</router-link>
+              <router-link to="/category/earphones">EARPHONES</router-link>
+            </nav>
+          </div>
+        </template>
+        <template #info>
+          <p>Audiophile is an all-in-one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we're open 7 days a week.</p>
+        </template>
+        <template #copyright>
+          <small>Copyright 2021. All Rights Reserved</small>
+        </template>
+        <template #socials>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">
+              <img src="@/assets/shared/desktop/icon-facebook.svg" alt="" />
+            </a>
+            <a href="#" aria-label="Twitter">
+              <img src="@/assets/shared/desktop/icon-twitter.svg" alt="" />
+            </a>
+            <a href="#" aria-label="Instagram">
+              <img src="@/assets/shared/desktop/icon-instagram.svg" alt="" />
+            </a>
+          </div>
+        </template>
+      </FooterSection>
     </div>
-    <FooterSection>
-      <template #nav>
-        <div>
-          <strong>audiophile</strong>
-          <nav>
-            <router-link to="/">HOME</router-link>
-            <router-link to="/category/headphones">HEADPHONES</router-link>
-            <router-link to="/category/speakers">SPEAKERS</router-link>
-            <router-link to="/category/earphones">EARPHONES</router-link>
-          </nav>
-        </div>
-      </template>
-      <template #info>
-        <p>Audiophile is an all-in-one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we're open 7 days a week.</p>
-      </template>
-      <template #copyright>
-        <small>Copyright 2021. All Rights Reserved</small>
-      </template>
-      <template #socials>
-        <div class="social-links">
-          <a href="#" aria-label="Facebook">
-            <img src="@/assets/shared/desktop/icon-facebook.svg" alt="" />
-          </a>
-          <a href="#" aria-label="Twitter">
-            <img src="@/assets/shared/desktop/icon-twitter.svg" alt="" />
-          </a>
-          <a href="#" aria-label="Instagram">
-            <img src="@/assets/shared/desktop/icon-instagram.svg" alt="" />
-          </a>
-        </div>
-      </template>
-    </FooterSection>
   </div>
 </template>
 
@@ -120,6 +121,7 @@ import CategoryCards from '@/components/CategoryCards.vue'
 import InfoSection from '@/components/InfoSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
 import productsData from '@/stores/data.json'
+import { useCartStore } from '@/stores/cart'
 
 export default {
   name: 'ProductDetailPage',
@@ -130,12 +132,37 @@ export default {
   },
   data() {
     return {
-      quantity: 1
+      quantity: 1,
+      categories: [
+        {
+          name: 'HEADPHONES',
+          link: '/category/headphones'
+        },
+        {
+          name: 'SPEAKERS',
+          link: '/category/speakers'
+        },
+        {
+          name: 'EARPHONES',
+          link: '/category/earphones'
+        }
+      ]
     }
+  },
+  setup() {
+    const cartStore = useCartStore()
+    return { cartStore }
   },
   computed: {
     product() {
       return productsData.find(p => p.slug === this.$route.params.slug)
+    }
+  },
+  methods: {
+    addToCart() {
+      if (this.product) {
+        this.cartStore.addToCart(this.product, this.quantity)
+      }
     }
   }
 }
@@ -396,6 +423,11 @@ h1 {
   margin-bottom: 120px;
 }
 
+/* Add spacing between sections */
+.categories {
+  margin-bottom: 120px;
+}
+
 @media (min-width: 768px) {
   .container {
     padding: 0 40px;
@@ -457,6 +489,10 @@ h1 {
     grid-template-columns: repeat(3, 1fr);
     gap: 11px;
   }
+
+  .categories {
+    margin-bottom: 160px;
+  }
 }
 
 @media (min-width: 1110px) {
@@ -497,6 +533,10 @@ h1 {
   }
 
   .info-section {
+    margin-bottom: 160px;
+  }
+
+  .categories {
     margin-bottom: 160px;
   }
 }

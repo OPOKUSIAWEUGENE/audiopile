@@ -31,7 +31,7 @@ export default {
 
 <style scoped>
 .categories {
-  padding: 200px 165px 0;
+  padding: 0;
   background: #FFFFFF;
 }
 
@@ -39,17 +39,18 @@ export default {
   max-width: 1110px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  grid-template-columns: 1fr;
+  gap: 68px;
+  padding: 0 24px;
 }
 
 .category-card {
   background: #F1F1F1;
   border-radius: 8px;
-  padding: 116px 0 30px;
+  padding: 88px 0 22px;
   text-align: center;
   position: relative;
-  min-height: 204px;
+  min-height: 165px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,34 +58,34 @@ export default {
 
 .category-image {
   position: absolute;
-  top: -80px;
+  top: -50px;
   left: 50%;
   transform: translateX(-50%);
-  width: 180px;
-  height: 180px;
+  width: 140px;
+  height: 140px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
 }
 
 .category-image img {
-  width: 170px;
+  width: 130px;
   height: auto;
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
 }
 
 h3 {
-  font-size: 18px;
-  line-height: 25px;
-  letter-spacing: 1.3px;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 1.07px;
   text-transform: uppercase;
   color: #000000;
-  margin-bottom: 15px;
+  margin-bottom: 17px;
   font-weight: 700;
 }
 
 .shop-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 13px;
   font-size: 13px;
@@ -101,58 +102,52 @@ h3 {
   color: #D87D4A;
 }
 
-.shop-link svg {
-  margin-top: 1px;
-}
-
-@media (max-width: 1110px) {
-  .categories {
-    padding: 148px 40px 0;
-  }
-
+@media (min-width: 768px) {
   .categories-container {
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+    padding: 0;
   }
 
   .category-card {
-    padding: 88px 0 24px;
-  }
-
-  .category-image {
-    top: -52px;
-    width: 148px;
-    height: 148px;
-  }
-
-  .category-image img {
-    width: 140px;
-  }
-}
-
-@media (max-width: 768px) {
-  .categories {
-    padding: 92px 24px 0;
-  }
-
-  .categories-container {
-    grid-template-columns: 1fr;
-    gap: 68px;
-    max-width: 327px;
-  }
-
-  .category-card {
-    min-height: 165px;
     padding: 88px 0 22px;
   }
 
   .category-image {
-    top: -50px;
     width: 140px;
     height: 140px;
   }
 
   .category-image img {
     width: 130px;
+  }
+}
+
+@media (min-width: 1110px) {
+  .categories-container {
+    gap: 30px;
+  }
+
+  .category-card {
+    padding: 116px 0 30px;
+    min-height: 204px;
+  }
+
+  .category-image {
+    top: -80px;
+    width: 180px;
+    height: 180px;
+  }
+
+  .category-image img {
+    width: 170px;
+  }
+
+  h3 {
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 1.3px;
+    margin-bottom: 15px;
   }
 }
 </style> 
