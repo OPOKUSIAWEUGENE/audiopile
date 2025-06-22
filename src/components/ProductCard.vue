@@ -119,6 +119,12 @@ p {
 
   .product-image {
     margin-bottom: 52px;
+    height: 352px;
+  }
+
+  .product-image img {
+    height: 100%;
+    object-fit: cover;
   }
 
   .product-content {
@@ -127,15 +133,27 @@ p {
     margin: 0 auto;
   }
 
+  .overline {
+    font-size: 12px;
+    letter-spacing: 8.57px;
+    margin-bottom: 16px;
+  }
+
   h2 {
     font-size: 40px;
     line-height: 44px;
     letter-spacing: 1.5px;
     margin-bottom: 32px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   p {
     margin-bottom: 32px;
+    max-width: 572px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

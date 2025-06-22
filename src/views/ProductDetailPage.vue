@@ -24,7 +24,7 @@
               <span>{{ quantity }}</span>
               <button @click="quantity++">+</button>
             </div>
-            <button class="btn-primary" @click="addToCart">ADD TO CART</button>
+            <button class="btn-primary">ADD TO CART</button>
           </div>
         </div>
       </div>
@@ -116,7 +116,6 @@
 </template>
 
 <script>
-import { useCartStore } from '@/stores/cart'
 import CategoryCards from '@/components/CategoryCards.vue'
 import InfoSection from '@/components/InfoSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
@@ -129,12 +128,6 @@ export default {
     InfoSection,
     FooterSection
   },
-  setup() {
-    const cartStore = useCartStore()
-    return {
-      cartStore
-    }
-  },
   data() {
     return {
       quantity: 1
@@ -143,15 +136,6 @@ export default {
   computed: {
     product() {
       return productsData.find(p => p.slug === this.$route.params.slug)
-    }
-  },
-  methods: {
-    addToCart() {
-      if (this.product) {
-        this.cartStore.addToCart(this.product, this.quantity)
-        // Reset quantity after adding to cart
-        this.quantity = 1
-      }
     }
   }
 }

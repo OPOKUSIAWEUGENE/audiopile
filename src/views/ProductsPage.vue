@@ -231,7 +231,7 @@ export default {
 
 @media (min-width: 768px) {
   .page-header {
-    padding: 105px 0;
+    padding: 98px 0;
     margin-bottom: 120px;
   }
 
@@ -243,16 +243,38 @@ export default {
 
   .products-grid {
     padding: 0 40px;
+    gap: 120px;
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .category-links {
     padding: 0 40px;
     flex-direction: row;
     gap: 10px;
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .category-link {
     flex: 1;
+    padding: 88px 0 22px;
+  }
+
+  .category-image {
+    width: 140px;
+    height: 140px;
+    top: -40px;
+  }
+
+  .category-image img {
+    width: 100px;
+  }
+
+  .info-section {
+    padding: 0 40px;
   }
 }
 

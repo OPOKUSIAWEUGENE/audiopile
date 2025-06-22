@@ -47,7 +47,6 @@ export default {
 <style scoped>
 .footer {
   background-color: #101010;
-  padding: 52px 24px;
   color: #FFFFFF;
 }
 
@@ -55,13 +54,17 @@ export default {
   max-width: 1110px;
   margin: 0 auto;
   position: relative;
+  padding: 52px 24px 38px;
 }
 
 .orange-line {
   width: 101px;
   height: 4px;
   background: #D87D4A;
-  margin-bottom: 48px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .footer-main {
@@ -106,6 +109,7 @@ export default {
   opacity: 0.5;
   margin-bottom: 48px;
   font-weight: 500;
+  mix-blend-mode: normal;
 }
 
 .copyright {
@@ -138,12 +142,14 @@ export default {
 }
 
 @media (min-width: 768px) {
-  .footer {
-    padding: 60px 40px;
+  .footer-content {
+    padding: 60px 40px 46px;
+    text-align: left;
   }
 
-  .footer-content {
-    text-align: left;
+  .orange-line {
+    left: 40px;
+    transform: none;
   }
 
   .footer-main {
@@ -181,8 +187,12 @@ export default {
 }
 
 @media (min-width: 1110px) {
-  .footer {
-    padding: 75px 0;
+  .footer-content {
+    padding: 75px 0 48px;
+  }
+
+  .orange-line {
+    left: 0;
   }
 
   .footer-main {
