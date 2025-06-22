@@ -19,12 +19,23 @@
           <div class="items-summary">
             <div class="main-item">
               <div class="item-info">
-                <img :src="require(`@/${firstItem.image.slice(2)}`)" :alt="firstItem.name" class="item-image" />
+                <img 
+                  v-if="firstItem?.image"
+                  :src="require(`@/${firstItem.image}`)" 
+                  :alt="firstItem.name" 
+                  class="item-image" 
+                />
+                <img 
+                  v-else
+                  src="@/assets/shared/desktop/image-category-thumbnail-headphones.png" 
+                  alt="Default product" 
+                  class="item-image" 
+                />
                 <div class="item-details">
-                  <h3>{{ formatProductName(firstItem.name) }}</h3>
-                  <p class="price">$ {{ firstItem.price.toLocaleString() }}</p>
+                  <h3>{{ formatProductName(firstItem?.name || '') }}</h3>
+                  <p class="price">$ {{ Number(firstItem?.price || 0).toLocaleString() }}</p>
                 </div>
-                <span class="quantity">x{{ firstItem.quantity }}</span>
+                <span class="quantity">x{{ firstItem?.quantity || 0 }}</span>
               </div>
               
               <div v-if="otherItemsCount > 0" class="other-items">
@@ -35,7 +46,7 @@
 
             <div class="grand-total">
               <span>GRAND TOTAL</span>
-              <span class="amount">$ {{ grandTotal.toLocaleString() }}</span>
+              <span class="amount">$ {{ Number(grandTotal).toLocaleString() }}</span>
             </div>
           </div>
         </div>
@@ -75,7 +86,7 @@ export default {
       return Math.max(0, this.cartStore.items.length - 1)
     },
     grandTotal() {
-      return this.cartStore.totalPrice + 50 // Adding shipping cost
+      return (this.cartStore.total || 0) + 50 // Adding shipping cost
     }
   },
   methods: {
@@ -94,6 +105,16 @@ export default {
 </script>
 
 <style scoped>
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -102,9 +123,8 @@ export default {
   bottom: 0;
   background: rgba(0, 0, 0, 0.4);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 24px;
   z-index: 1000;
 }
 
@@ -112,8 +132,10 @@ export default {
   background: white;
   border-radius: 8px;
   padding: 32px;
-  width: 100%;
+  width: calc(100% - 48px);
   max-width: 540px;
+  margin: 24px;
+  margin-top: 120px;
 }
 
 .check-icon {
@@ -124,7 +146,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 24px;
+  margin-bottom: 23px;
 }
 
 .check-icon img {
@@ -138,6 +160,7 @@ export default {
   letter-spacing: 0.86px;
   font-weight: 700;
   margin-bottom: 16px;
+  color: #000000;
 }
 
 .confirmation-message {
@@ -145,16 +168,17 @@ export default {
   font-size: 15px;
   line-height: 25px;
   margin-bottom: 24px;
+  font-weight: 500;
 }
 
 .order-summary {
-  margin-bottom: 24px;
+  margin-bottom: 23px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .items-summary {
   background: #F1F1F1;
-  border-radius: 8px;
-  overflow: hidden;
 }
 
 .main-item {
@@ -173,6 +197,7 @@ export default {
   height: 50px;
   border-radius: 8px;
   object-fit: cover;
+  background: #ffffff;
 }
 
 .item-details h3 {
@@ -180,6 +205,7 @@ export default {
   line-height: 25px;
   font-weight: 700;
   margin: 0;
+  color: #000000;
 }
 
 .price {
@@ -254,14 +280,33 @@ export default {
   background: #FBAF85;
 }
 
-/* Modal transitions */
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s ease;
-}
+@media (max-width: 767px) {
+  .modal-content {
+    margin: 24px;
+    padding: 32px;
+    margin-top: 103px;
+  }
 
-.modal-enter-from,
-.modal-leave-to {
-  opacity: 0;
+  .check-icon {
+    margin-bottom: 23px;
+  }
+
+  .title {
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 16px;
+  }
+
+  .confirmation-message {
+    margin-bottom: 24px;
+  }
+
+  .order-summary {
+    margin-bottom: 23px;
+  }
+
+  .main-item {
+    padding: 24px;
+  }
 }
 </style> 

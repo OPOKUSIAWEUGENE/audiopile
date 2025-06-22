@@ -28,7 +28,7 @@ export const useCartStore = defineStore('cart', {
           id: product.id,
           name: product.name.split(' ').slice(0, -1).join(' '), // Remove the last word (e.g., "Headphones")
           price: product.price,
-          image: product.image.mobile.replace(/^\.\//, ''), // Remove leading ./ but keep the full path
+          image: product.image?.mobile?.replace(/^\.\//, '') || 'assets/shared/desktop/image-category-thumbnail-headphones.png', // Provide default image
           quantity: quantity
         })
       }
