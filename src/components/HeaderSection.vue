@@ -225,11 +225,12 @@ export default {
 .mobile-menu.is-open {
   opacity: 1;
   visibility: visible;
+  display: block;
 }
 
 .mobile-menu-content {
   background-color: #FFFFFF;
-  padding: 84px 24px 35px;
+  padding: 56px 40px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   max-height: calc(100vh - 90px);
@@ -238,8 +239,9 @@ export default {
 
 .mobile-categories {
   display: grid;
-  gap: 68px;
-  max-width: 327px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -309,44 +311,45 @@ export default {
 @media (max-width: 1110px) {
   .header-container {
     padding: 0 40px;
+    max-width: none;
   }
 
-  .nav-links {
-    position: static;
-    transform: none;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .header {
-    height: 90px;
-  }
-
-  .header-container {
-    padding: 0 24px;
-  }
-
-  .hamburger {
-    display: block;
+  .nav {
+    justify-content: space-between;
+    gap: 42px;
   }
 
   .nav-links {
     display: none;
   }
 
-  .mobile-menu {
+  .hamburger {
     display: block;
+    margin-right: 0;
+  }
+
+  .logo {
+    margin: 0;
+  }
+
+  .cart {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 24px;
+  }
+
+  .nav {
+    gap: 0;
   }
 
   .logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-  }
-
-  .nav {
-    border-bottom: none;
   }
 
   .header::after {
@@ -357,6 +360,16 @@ export default {
     right: 0;
     height: 1px;
     background: rgba(255, 255, 255, 0.2);
+  }
+
+  .mobile-menu-content {
+    padding: 84px 24px 35px;
+  }
+
+  .mobile-categories {
+    grid-template-columns: 1fr;
+    gap: 68px;
+    max-width: 327px;
   }
 }
 </style> 
