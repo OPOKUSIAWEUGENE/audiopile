@@ -3,9 +3,10 @@
     <div class="container">
       <button class="go-back" @click="$router.go(-1)">Go Back</button>
       
-      <h1>CHECKOUT</h1>
+   
       
       <form @submit.prevent="handleSubmit" class="checkout-form">
+        <h1>CHECKOUT</h1>
         <section class="billing-details">
           <h2>BILLING DETAILS</h2>
           <div class="form-grid">
