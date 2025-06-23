@@ -230,6 +230,18 @@ export default {
 
   .footer-bottom {
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .social-links {
+    justify-self: end;
+    align-self: start;
+    margin-top: -80px;
+  }
+
+  .copyright {
+    align-self: end;
   }
 }
 </style> 
