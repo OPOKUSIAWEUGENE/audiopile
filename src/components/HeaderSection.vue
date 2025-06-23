@@ -16,7 +16,7 @@
         </div>
         <button class="cart" @click="toggleCart">
           <img src="../assets/shared/desktop/icon-cart.svg" alt="Cart" />
-          <span v-if="totalItems > 0" class="cart-count">{{ totalItems }}</span>
+          <!-- <span v-if="totalItems > 0" class="cart-count">{{ totalItems }}</span> -->
         </button>
       </nav>
     </div>

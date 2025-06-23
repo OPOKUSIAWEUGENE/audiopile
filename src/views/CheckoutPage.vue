@@ -211,9 +211,8 @@ export default {
 
 <style scoped>
 .checkout-page {
-  background-color: #FAFAFA;
-  padding: 16px 24px 97px;
-  min-height: 100vh;
+  background: #F2F2F2;
+  padding: 16px;
   margin-top: 89px;
 }
 
@@ -230,8 +229,9 @@ export default {
   line-height: 25px;
   font-weight: 500;
   cursor: pointer;
-  padding: 16px 0;
+  padding: 0;
   margin-bottom: 24px;
+  transition: color 0.3s ease;
 }
 
 .go-back:hover {
@@ -563,16 +563,24 @@ input[type="password"]:focus {
     grid-template-columns: 730px 350px;
     gap: 30px;
     align-items: start;
+    position: relative;
   }
 
   .go-back {
-    grid-column: 1 / -1;
-    margin-bottom: 38px;
+    position: absolute;
+    top: -38px;
+    left: 0;
+    margin-bottom: 0;
   }
 
   .checkout-form {
     padding: 54px 48px 48px;
     margin-bottom: 0;
+    grid-column: 1;
+  }
+
+  .summary {
+    grid-column: 2;
   }
 
   .form-grid {
