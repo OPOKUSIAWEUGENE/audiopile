@@ -47,7 +47,7 @@ Audiopile is a modern e-commerce platform specializing in high-end audio equipme
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/audiopile.git
+git clone https://github.com/OPOKUSIAWEUGENE/audiopile.git
 ```
 
 2. Navigate to the project directory:
