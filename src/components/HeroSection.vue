@@ -116,13 +116,13 @@ p {
   }
 
   .hero::before {
-    background: linear-gradient(
+    /* background: linear-gradient(
       90deg,
       rgba(0, 0, 0, 0.9) 0%,
       rgba(0, 0, 0, 0.6) 15%,
       rgba(0, 0, 0, 0.3) 30%,
       rgba(0, 0, 0, 0) 45%
-    );
+    ); */
   }
 
   .hero-content {
