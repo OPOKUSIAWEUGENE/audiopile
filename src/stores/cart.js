@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    items: []
+    items: [],
+    isCartOpen: false
   }),
   
   getters: {
@@ -13,12 +14,12 @@ export const useCartStore = defineStore('cart', {
     },
     
     totalItems: (state) => {
-      return state.items.reduce((sum, item) => sum + item.quantity, 0)
+      return state.items.reduce((total, item) => total + item.quantity, 0)
     }
   },
   
   actions: {
-    addToCart(product, quantity) {
+    addToCart(product, quantity = 1) {
       const existingItem = this.items.find(item => item.id === product.id)
       
       if (existingItem) {
@@ -26,12 +27,13 @@ export const useCartStore = defineStore('cart', {
       } else {
         this.items.push({
           id: product.id,
-          name: product.name.split(' ').slice(0, -1).join(' '), // Remove the last word (e.g., "Headphones")
+          name: product.name.split(' ').slice(0, -1).join(' '), // Remove the last word (usually "Headphones", "Speaker", etc.)
           price: product.price,
-          image: product.image?.mobile?.replace(/^\.\//, '') || 'assets/shared/desktop/image-category-thumbnail-headphones.png', // Provide default image
-          quantity: quantity
+          image: product.image.mobile.slice(2), // Remove './' from the start
+          quantity
         })
       }
+      this.isCartOpen = true
     },
     
     incrementQuantity(productId) {
@@ -43,12 +45,10 @@ export const useCartStore = defineStore('cart', {
     
     decrementQuantity(productId) {
       const item = this.items.find(item => item.id === productId)
-      if (item) {
-        if (item.quantity > 1) {
-          item.quantity--
-        } else {
-          this.removeItem(productId)
-        }
+      if (item && item.quantity > 1) {
+        item.quantity--
+      } else if (item) {
+        this.items = this.items.filter(i => i.id !== productId)
       }
     },
     
@@ -63,8 +63,12 @@ export const useCartStore = defineStore('cart', {
       }
     },
 
-    clearCart() {
-      this.items = []
+    toggleCart() {
+      this.isCartOpen = !this.isCartOpen
+    },
+
+    closeCart() {
+      this.isCartOpen = false
     }
   }
 }) 

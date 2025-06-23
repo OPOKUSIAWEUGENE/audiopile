@@ -14,15 +14,15 @@
           <router-link to="/category/speakers" class="nav-link">SPEAKERS</router-link>
           <router-link to="/category/earphones" class="nav-link">EARPHONES</router-link>
         </div>
-        <button class="cart" @click="toggleCart">
+        <button class="cart" @click="cartStore.toggleCart">
           <img src="../assets/shared/desktop/icon-cart.svg" alt="Cart" />
-          <!-- <span v-if="totalItems > 0" class="cart-count">{{ totalItems }}</span> -->
+          <span v-if="cartStore.totalItems > 0" class="cart-count">{{ cartStore.totalItems }}</span>
         </button>
       </nav>
     </div>
     
     <!-- Cart Menu -->
-    <CartMenu v-if="isCartOpen" @close="closeCart" />
+    <CartMenu v-if="cartStore.isCartOpen" @close="cartStore.closeCart" />
 
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu" :class="{ 'is-open': isMobileMenuOpen }" @click="closeMenu">
@@ -47,7 +47,6 @@
 <script>
 import { ref } from 'vue'
 import { useCartStore } from '../stores/cart'
-import { storeToRefs } from 'pinia'
 import CartMenu from './CartMenu.vue'
 
 export default {
@@ -56,7 +55,6 @@ export default {
     CartMenu
   },
   setup() {
-    const isCartOpen = ref(false)
     const isMobileMenuOpen = ref(false)
     const categories = [
       { name: 'HEADPHONES', link: '/category/headphones' },
@@ -65,11 +63,6 @@ export default {
     ]
 
     const cartStore = useCartStore()
-    const { totalItems } = storeToRefs(cartStore)
-
-    const toggleCart = () => {
-      isCartOpen.value = !isCartOpen.value
-    }
 
     const toggleMobileMenu = () => {
       isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -79,19 +72,12 @@ export default {
       isMobileMenuOpen.value = false
     }
 
-    const closeCart = () => {
-      isCartOpen.value = false
-    }
-
     return {
-      isCartOpen,
       isMobileMenuOpen,
-      toggleCart,
       toggleMobileMenu,
       closeMenu,
-      closeCart,
       categories,
-      totalItems
+      cartStore
     }
   }
 }
