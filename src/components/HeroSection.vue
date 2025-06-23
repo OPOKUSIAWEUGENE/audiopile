@@ -131,15 +131,14 @@ p {
     padding: 0;
     max-width: 1110px;
     margin: 0 auto;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .hero-content-inner {
     margin-left: 0;
     max-width: 380px;
     margin-top: -30px;
-    margin-right: auto;
-    padding-left: 80px;
+    padding-left: 40px;
   }
 
   h1 {
