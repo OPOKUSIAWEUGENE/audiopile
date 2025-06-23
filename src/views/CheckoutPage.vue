@@ -3,22 +3,55 @@
     <div class="container">
       <button class="go-back" @click="$router.go(-1)">Go Back</button>
       
-      <form @submit.prevent="handleSubmit" class="checkout-form">
+      <form @submit.prevent="handleSubmit" class="checkout-form" novalidate>
         <h1>CHECKOUT</h1>
         <section class="billing-details">
           <h2>BILLING DETAILS</h2>
           <div class="form-grid">
             <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" v-model="formData.name" placeholder="Alexei Ward" required>
+              <div class="label-group">
+                <label for="name">Name</label>
+                <span class="error-message" v-if="errors.name">{{ errors.name }}</span>
+              </div>
+              <input 
+                type="text" 
+                id="name" 
+                v-model="formData.name" 
+                placeholder="Alexei Ward"
+                :class="{ 'error': errors.name }"
+                @blur="validateField('name')"
+                required
+              >
             </div>
             <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" v-model="formData.email" placeholder="alexei@mail.com" required>
+              <div class="label-group">
+                <label for="email">Email Address</label>
+                <span class="error-message" v-if="errors.email">{{ errors.email }}</span>
+              </div>
+              <input 
+                type="email" 
+                id="email" 
+                v-model="formData.email" 
+                placeholder="alexei@mail.com"
+                :class="{ 'error': errors.email }"
+                @blur="validateField('email')"
+                required
+              >
             </div>
             <div class="form-group">
-              <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" v-model="formData.phone" placeholder="+1 202-555-0136" required>
+              <div class="label-group">
+                <label for="phone">Phone Number</label>
+                <span class="error-message" v-if="errors.phone">{{ errors.phone }}</span>
+              </div>
+              <input 
+                type="tel" 
+                id="phone" 
+                v-model="formData.phone" 
+                placeholder="+1 202-555-0136"
+                :class="{ 'error': errors.phone }"
+                @blur="validateField('phone')"
+                required
+              >
             </div>
           </div>
         </section>
@@ -27,20 +60,64 @@
           <h2>SHIPPING INFO</h2>
           <div class="form-grid">
             <div class="form-group full-width">
-              <label for="address">Your Address</label>
-              <input type="text" id="address" v-model="formData.address" placeholder="1137 Williams Avenue" required>
+              <div class="label-group">
+                <label for="address">Your Address</label>
+                <span class="error-message" v-if="errors.address">{{ errors.address }}</span>
+              </div>
+              <input 
+                type="text" 
+                id="address" 
+                v-model="formData.address" 
+                placeholder="1137 Williams Avenue"
+                :class="{ 'error': errors.address }"
+                @blur="validateField('address')"
+                required
+              >
             </div>
             <div class="form-group">
-              <label for="zipCode">ZIP Code</label>
-              <input type="text" id="zipCode" v-model="formData.zipCode" placeholder="10001" required>
+              <div class="label-group">
+                <label for="zipCode">ZIP Code</label>
+                <span class="error-message" v-if="errors.zipCode">{{ errors.zipCode }}</span>
+              </div>
+              <input 
+                type="text" 
+                id="zipCode" 
+                v-model="formData.zipCode" 
+                placeholder="10001"
+                :class="{ 'error': errors.zipCode }"
+                @blur="validateField('zipCode')"
+                required
+              >
             </div>
             <div class="form-group">
-              <label for="city">City</label>
-              <input type="text" id="city" v-model="formData.city" placeholder="New York" required>
+              <div class="label-group">
+                <label for="city">City</label>
+                <span class="error-message" v-if="errors.city">{{ errors.city }}</span>
+              </div>
+              <input 
+                type="text" 
+                id="city" 
+                v-model="formData.city" 
+                placeholder="New York"
+                :class="{ 'error': errors.city }"
+                @blur="validateField('city')"
+                required
+              >
             </div>
             <div class="form-group">
-              <label for="country">Country</label>
-              <input type="text" id="country" v-model="formData.country" placeholder="United States" required>
+              <div class="label-group">
+                <label for="country">Country</label>
+                <span class="error-message" v-if="errors.country">{{ errors.country }}</span>
+              </div>
+              <input 
+                type="text" 
+                id="country" 
+                v-model="formData.country" 
+                placeholder="United States"
+                :class="{ 'error': errors.country }"
+                @blur="validateField('country')"
+                required
+              >
             </div>
           </div>
         </section>
@@ -63,12 +140,34 @@
             </div>
             <template v-if="formData.paymentMethod === 'e-Money'">
               <div class="form-group">
-                <label for="eMoneyNumber">e-Money Number</label>
-                <input type="text" id="eMoneyNumber" v-model="formData.eMoneyNumber" placeholder="238521993" required>
+                <div class="label-group">
+                  <label for="eMoneyNumber">e-Money Number</label>
+                  <span class="error-message" v-if="errors.eMoneyNumber">{{ errors.eMoneyNumber }}</span>
+                </div>
+                <input 
+                  type="text" 
+                  id="eMoneyNumber" 
+                  v-model="formData.eMoneyNumber" 
+                  placeholder="238521993"
+                  :class="{ 'error': errors.eMoneyNumber }"
+                  @blur="validateField('eMoneyNumber')"
+                  required
+                >
               </div>
               <div class="form-group">
-                <label for="eMoneyPin">e-Money PIN</label>
-                <input type="password" id="eMoneyPin" v-model="formData.eMoneyPin" placeholder="6891" required>
+                <div class="label-group">
+                  <label for="eMoneyPin">e-Money PIN</label>
+                  <span class="error-message" v-if="errors.eMoneyPin">{{ errors.eMoneyPin }}</span>
+                </div>
+                <input 
+                  type="password" 
+                  id="eMoneyPin" 
+                  v-model="formData.eMoneyPin" 
+                  placeholder="6891"
+                  :class="{ 'error': errors.eMoneyPin }"
+                  @blur="validateField('eMoneyPin')"
+                  required
+                >
               </div>
             </template>
             <template v-else>
@@ -123,7 +222,7 @@
           type="button"
           class="continue-pay" 
           :disabled="!cartStore.items.length"
-          @click="showOrderConfirmation"
+          @click="handleSubmit"
         >
           CONTINUE & PAY
         </button>
@@ -163,7 +262,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { useCartStore } from '@/stores/cart'
 import FooterSection from '@/components/FooterSection.vue'
 import OrderConfirmationModal from '@/components/OrderConfirmationModal.vue'
@@ -177,7 +276,7 @@ export default {
   setup() {
     const cartStore = useCartStore()
     const showConfirmation = ref(false)
-    const formData = ref({
+    const formData = reactive({
       name: '',
       email: '',
       phone: '',
@@ -190,20 +289,131 @@ export default {
       eMoneyPin: ''
     })
 
-    const handleSubmit = () => {
-      showConfirmation.value = true
+    const errors = reactive({
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+      zipCode: '',
+      city: '',
+      country: '',
+      eMoneyNumber: '',
+      eMoneyPin: ''
+    })
+
+    const validateEmail = (email) => {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
     }
 
-    const showOrderConfirmation = () => {
-      showConfirmation.value = true
+    const validatePhone = (phone) => {
+      return /^\+?[1-9]\d{1,14}$/.test(phone)
+    }
+
+    const validateField = (field) => {
+      errors[field] = ''
+
+      switch (field) {
+        case 'name':
+          if (!formData.name) {
+            errors.name = 'Name is required'
+          } else if (formData.name.length < 2) {
+            errors.name = 'Name must be at least 2 characters'
+          }
+          break
+
+        case 'email':
+          if (!formData.email) {
+            errors.email = 'Email is required'
+          } else if (!validateEmail(formData.email)) {
+            errors.email = 'Please provide a valid email'
+          }
+          break
+
+        case 'phone':
+          if (!formData.phone) {
+            errors.phone = 'Phone number is required'
+          } else if (!validatePhone(formData.phone)) {
+            errors.phone = 'Please provide a valid phone number'
+          }
+          break
+
+        case 'address':
+          if (!formData.address) {
+            errors.address = 'Address is required'
+          } else if (formData.address.length < 5) {
+            errors.address = 'Please provide a complete address'
+          }
+          break
+
+        case 'zipCode':
+          if (!formData.zipCode) {
+            errors.zipCode = 'ZIP code is required'
+          } else if (!/^\d{5}(-\d{4})?$/.test(formData.zipCode)) {
+            errors.zipCode = 'Please provide a valid ZIP code'
+          }
+          break
+
+        case 'city':
+          if (!formData.city) {
+            errors.city = 'City is required'
+          }
+          break
+
+        case 'country':
+          if (!formData.country) {
+            errors.country = 'Country is required'
+          }
+          break
+
+        case 'eMoneyNumber':
+          if (formData.paymentMethod === 'e-Money' && !formData.eMoneyNumber) {
+            errors.eMoneyNumber = 'e-Money number is required'
+          } else if (formData.paymentMethod === 'e-Money' && !/^\d{9}$/.test(formData.eMoneyNumber)) {
+            errors.eMoneyNumber = 'Please provide a valid 9-digit e-Money number'
+          }
+          break
+
+        case 'eMoneyPin':
+          if (formData.paymentMethod === 'e-Money' && !formData.eMoneyPin) {
+            errors.eMoneyPin = 'e-Money PIN is required'
+          } else if (formData.paymentMethod === 'e-Money' && !/^\d{4}$/.test(formData.eMoneyPin)) {
+            errors.eMoneyPin = 'Please provide a valid 4-digit PIN'
+          }
+          break
+      }
+    }
+
+    const validateForm = () => {
+      let isValid = true
+      const fields = ['name', 'email', 'phone', 'address', 'zipCode', 'city', 'country']
+      
+      if (formData.paymentMethod === 'e-Money') {
+        fields.push('eMoneyNumber', 'eMoneyPin')
+      }
+
+      fields.forEach(field => {
+        validateField(field)
+        if (errors[field]) {
+          isValid = false
+        }
+      })
+
+      return isValid
+    }
+
+    const handleSubmit = () => {
+      if (validateForm()) {
+        showConfirmation.value = true
+      }
     }
 
     return {
       cartStore,
       formData,
+      errors,
       showConfirmation,
-      handleSubmit,
-      showOrderConfirmation
+      validateField,
+      handleSubmit
     }
   }
 }
@@ -702,5 +912,27 @@ input[type="password"]:focus {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.label-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 9px;
+}
+
+.error-message {
+  color: #CD2C2C;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+input.error {
+  border-color: #CD2C2C;
+}
+
+input.error:focus {
+  border-color: #CD2C2C;
+  outline-color: #CD2C2C;
 }
 </style> 
