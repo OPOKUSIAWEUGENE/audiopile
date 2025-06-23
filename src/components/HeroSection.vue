@@ -146,6 +146,9 @@ p {
     line-height: 58px;
     letter-spacing: 2px;
     margin-bottom: 24px;
+    display: flex;
+    /* flex-direction: column; */
+    gap: 2px;
   }
 
   .overline {
