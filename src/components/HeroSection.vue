@@ -108,12 +108,55 @@ p {
 
 @media (min-width: 1200px) {
   .hero {
-    height: 729px;
+    height: 900px;
+    background-position: right -200px center;
+    background-size: 1550px;
+    margin-top: -97px;
+    padding-top: 97px;
+  }
+
+  .hero::before {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.6) 15%,
+      rgba(0, 0, 0, 0.3) 30%,
+      rgba(0, 0, 0, 0) 45%
+    );
   }
 
   .hero-content {
     display: flex;
     align-items: center;
+    padding: 0;
+    max-width: 1110px;
+    margin: 0 auto;
+  }
+
+  .hero-content-inner {
+    margin-left: 165px;
+    max-width: 380px;
+    margin-top: -30px;
+  }
+
+  h1 {
+    font-size: 56px;
+    line-height: 58px;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+
+  .overline {
+    font-size: 14px;
+    margin-bottom: 24px;
+    letter-spacing: 10px;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 25px;
+    margin-bottom: 40px;
+    max-width: 349px;
   }
 }
 
