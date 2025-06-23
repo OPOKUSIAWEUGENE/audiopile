@@ -125,7 +125,7 @@ export default {
 }
 
 .page-header {
-  background-color: #000000;
+  background-color: #141414;
   padding: 32px 0;
   text-align: center;
   margin-bottom: 64px;
