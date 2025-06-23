@@ -109,8 +109,8 @@ p {
 @media (min-width: 1200px) {
   .hero {
     height: 900px;
-    background-position: right -200px center;
-    background-size: 1550px;
+    background-position: right 100px center;
+    background-size: 1400px;
     margin-top: -97px;
     padding-top: 97px;
   }
@@ -131,12 +131,15 @@ p {
     padding: 0;
     max-width: 1110px;
     margin: 0 auto;
+    justify-content: center;
   }
 
   .hero-content-inner {
-    margin-left: 165px;
+    margin-left: 0;
     max-width: 380px;
     margin-top: -30px;
+    margin-right: auto;
+    padding-left: 80px;
   }
 
   h1 {
