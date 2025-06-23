@@ -9,7 +9,7 @@
         <div class="featured-main-text">
           <h2>ZX9<br>SPEAKER</h2>
           <p>Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.</p>
-          <button class="btn-black">SEE PRODUCT</button>
+          <button class="btn-black" @click="navigateToProduct('zx9-speaker')">SEE PRODUCT</button>
         </div>
       </div>
       <img src="@/assets/home/desktop/pattern-circles.svg" alt="" class="circles-pattern" />
@@ -19,7 +19,7 @@
     <div class="featured-secondary">
       <div class="featured-secondary-content">
         <h2>ZX7 SPEAKER</h2>
-        <button class="btn-transparent">SEE PRODUCT</button>
+        <button class="btn-transparent" @click="navigateToProduct('zx7-speaker')">SEE PRODUCT</button>
       </div>
     </div>
 
@@ -30,15 +30,28 @@
       </div>
       <div class="featured-split-content">
         <h2>YX1 EARPHONES</h2>
-        <button class="btn-transparent">SEE PRODUCT</button>
+        <button class="btn-transparent" @click="navigateToProduct('yx1-earphones')">SEE PRODUCT</button>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+
 export default {
-  name: 'FeaturedProduct'
+  name: 'FeaturedProduct',
+  setup() {
+    const router = useRouter();
+
+    const navigateToProduct = (slug) => {
+      router.push(`/product/${slug}`);
+    };
+
+    return {
+      navigateToProduct
+    };
+  }
 }
 </script>
 
